@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'MaterialIcons-Regular';
+    font-style: normal;
+    src: url(../assets/fonts/MaterialIcons-Regular.ttf)
+}
+@font-face {
+    font-family: 'lato.regular';
+    font-style: normal;
+    src: url(../assets/fonts/lato.regular.ttf)
+}
+@font-face {
+    font-family: 'lato.bold';
+    font-style: normal;
+    src: url(../assets/fonts/lato.bold.ttf)
+}
+.main-header {
+    height: 100px;
+    background-color: #05396D;
+    width: 100%;
+}
+.navbar {
+    height: 30px;
+}
+body {
+    background: #F2F2F2;
+    margin: 0px;
+    font-family: 'lato.regular', Geneva;
+}
+.main-header a:link,
+.main-header a:visited,
+.main-header a:active {
+    text-decoration: none;
+    color: #FFCD1D;
+}
+.tab {
+    color: #FFCD1D;
+    letter-spacing: 3px;
+    vertical-align: middle;
+    line-height: 100px;
+    margin-right: 70px;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 38px;
+}
+.tab:hover {
+    background-color: #FFCD1D;
+    color: #05396D !important;
+    transition-duration: 500ms;   
+}
+.tab:not(:hover) {
+    transition-duration: 500ms;
+}
+.tab:active, .tab:focus-within {
+    background-color: #FFCD1D;
+    color: #05396D !important;
+}
+.content {
+    width: 80%;
+    margin: auto
+}
+.cinema-name {
+    width: 70px;
+    height: 70px;
+    margin: 15px 100px;
+    float: left;
+}
+
+.main-header input {
+    padding: 10px;
+    border-radius: 5px;
+}
+.main-header input:focus {
+    outline-color: #FFCD1D;
+}
+.main-header button {
+    background-color: #FFCD1D;
+    color: #05396D;
+    padding: 10px;
+    border-radius: 5px;
+}
+.cart {
+    font-family: 'MaterialIcons-Regular';
+    color: #FFCD1D;
+    font-size: 30px;
+    float: right;
+    line-height: 100px;
+    margin-right: 100px;
+}
