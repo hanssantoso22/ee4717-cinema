@@ -1,3 +1,6 @@
+/* GLOBAL CSS */
+
+
 @font-face {
     font-family: 'MaterialIcons-Regular';
     font-style: normal;
@@ -13,7 +16,10 @@
     font-style: normal;
     src: url(../assets/fonts/lato.bold.ttf)
 }
-.main-header {
+
+/* HEADER STYLING */
+
+#main-header {
     height: 100px;
     background-color: #05396D;
     width: 100%;
@@ -26,11 +32,15 @@ body {
     margin: 0px;
     font-family: 'lato.regular', Geneva;
 }
-.main-header a:link,
-.main-header a:visited,
-.main-header a:active {
+#main-header a:link,
+#main-header a:visited,
+#main-header a:active {
     text-decoration: none;
     color: #FFCD1D;
+}
+#main-header .active {
+    background-color: #FFCD1D;
+    color: #05396D !important;
 }
 .tab {
     color: #FFCD1D;
@@ -56,7 +66,7 @@ body {
 }
 .content {
     width: 80%;
-    margin: auto
+    margin: auto;
 }
 .cinema-name {
     width: 70px;
@@ -65,14 +75,14 @@ body {
     float: left;
 }
 
-.main-header input {
+#main-header input {
     padding: 10px;
     border-radius: 5px;
 }
-.main-header input:focus {
+#main-header input:focus {
     outline-color: #FFCD1D;
 }
-.main-header button {
+#main-header button {
     background-color: #FFCD1D;
     color: #05396D;
     padding: 10px;
@@ -86,3 +96,208 @@ body {
     line-height: 100px;
     margin-right: 100px;
 }
+
+/* MAIN CONTENT LAYOUT */
+
+#main-body {
+    width: 80%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+html, body {
+    height: 100%;
+}
+.page-title {
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #05396D;
+}
+#content-box {
+    width: 90%;
+    margin: auto;
+    padding-top: 30px;
+}
+
+/* FOOTER STYLING */
+
+#main-footer {
+    background-color: #05396D;
+    height: 100px;
+    color: #FFCD1D;
+    vertical-align: middle;
+    line-height: 100px;
+    letter-spacing: 1px;
+    font-size: 20px;
+    padding-left: 70px;
+}
+#main-footer p {
+    margin-top: 0px !important;
+}
+
+/* FLEX COLUMNS */
+
+.row {
+    display:flex;
+    flex-wrap:wrap;
+}
+.col-1 {    
+    flex:0 0 8.333333%;
+    max-width:8.333333%
+}
+.col-2 {    
+    flex:0 0 16.666667%;
+    max-width:16.666667%
+}
+.col-3 {    
+    flex:0 0 25%;
+    max-width:25%;
+    margin: 0px;
+}
+.col-4 {    
+    flex:0 0 33.333333%;
+    max-width:33.333333%
+}
+.col-5 {    
+    flex:0 0 41.666667%;
+    max-width:41.666667%
+}
+.col-6 {    
+    flex:0 0 50%;
+    max-width:50%
+}
+.col-7 {    
+    flex:0 0 58.333333%;
+    max-width:58.333333%
+}
+.col-8 {    
+    flex:0 0 66.666667%;
+    max-width:66.666667%
+}
+.col-9 {    
+    flex:0 0 75%;
+    max-width:75%
+}
+.col-10 {    
+    flex:0 0 83.333333%;
+    max-width:83.333333%
+}
+.col-11 {    
+    flex:0 0 91.666667%;
+    max-width:91.666667%
+}
+.col-12 {    
+    flex:0 0 100%;
+    max-width:100%
+}
+
+/* FONTS */
+
+.bold {
+    font-family: 'lato.bold';
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.left {
+    text-align: left;
+}
+.font-30 {
+    font-size: 30px;
+}
+.font-24 {
+    font-size: 24px;
+}
+.font-20 {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+.font-16 {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+.font-13 {
+    font-size: 13px;
+}
+
+/* GREYS */
+
+.grey-1 {
+    color: #F2F2F2;
+}
+.grey-2 {
+    color: #D6D5D5;
+}
+.grey-3 {
+    color: #AEAEAE;
+}
+.grey-4 {
+    color: #929292;
+}
+.grey-5 {
+    color: #777777;
+}
+.grey-6 {
+    color: #5C5C5C;
+}
+.grey-7 {
+    color: #414141;
+}
+
+/* BLUES */
+
+.blue-7 {
+    color: #05396D;
+}
+.blue-6 {
+    color: #0755A3;
+}
+.blue-5 {
+    color: #0A72D9;
+}
+.blue-4 {
+    color: #5DAAF8;
+}
+
+/* HEADER TITLE */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'lato.regular';
+    color: #05396D;
+}
+
+/* INPUT FORM BODY */
+
+#main-body input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid#AEAEAE;
+    font-family: 'lato.regular';
+    font-size: 16px;
+}
+#main-body input:focus {
+    outline-color: #0755A3;
+}
+#main-body input[type="button" i] .primary{
+    background-color: #0755A3;
+    color: #FFCD1D;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border-width: 0px;
+    font-family: 'lato.bold';
+    letter-spacing: 1px;
+}
+#main-body input[type="submit" i] {
+    background-color: #0755A3;
+    color: #FFCD1D;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border-width: 0px;
+    font-family: 'lato.bold';
+    letter-spacing: 1px;
+}
+

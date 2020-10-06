@@ -1,0 +1,34 @@
+#banner {
+    height: 200px;
+}
+.movie-card {
+    border: 0.6px solid #D6D5D5;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    transition: 300ms;
+}
+.movie-card a:link,
+.movie-card a:visited,
+.movie-card a:active {
+    text-decoration: none;
+    color: #5C5C5C;
+}
+.movie-card a:hover {
+    color: #0755A3;
+}
+.movie-card:hover {
+    transition: 300ms;
+    transform: scale(1.06);
+    border: 0.9px solid #929292;
+}
+.movie-description {
+    font-size: 13px;
+    font-weight: 400px;
+    letter-spacing: 1px;
+    color: #AEAEAE;
+}
+.movie-poster {
+    width: 100%;
+    height: 250px;
+}

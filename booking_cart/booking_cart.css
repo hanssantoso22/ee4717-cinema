@@ -1,0 +1,9 @@
+#payment-summary-card {
+    border: 2px solid #D6D5D5;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    padding: 10px 30px 20px 30px;
+}
+td {
+    padding-bottom: 20px;
+}
