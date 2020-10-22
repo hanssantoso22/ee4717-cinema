@@ -4,6 +4,40 @@
     margin-bottom: 30px;
     padding: 10px 30px 20px 30px;
 }
+.order-card {
+    border: 1px solid #bfbfbf;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    padding: 5px 30px 20px 5px;
+}
 td {
     padding-bottom: 20px;
+}
+.icon-container {
+    height: 100%;
+    vertical-align: middle;
+    padding-top: 50%;
+    text-align: center;
+}
+.icon {
+    height: 100%;
+}
+#textbox {
+    text-align: center;
+    padding-top: 25%;
+}
+#textbox h1 {
+    letter-spacing: 0.5px;
+}
+.delete-icon a:link,
+.delete-icon a:visited,
+.delete-icon a:active {
+    text-decoration: none;
+    color: #AA042C;
+}
+.edit-icon a:link,
+.edit-icon a:visited,
+.edit-icon a:active {
+    text-decoration: none;
+    color: #D6D5D5;
 }

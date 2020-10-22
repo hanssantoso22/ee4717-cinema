@@ -19,46 +19,129 @@
            </div>
        </div>
        <div id="main-body">
-           <div id="banner"></div>
            <div id="content-box">
-               <div>
-                    <p class="page-title">Now Playing</p>
+               <div class="row">
+                    <div class="col-2" >
+                        <div class="filters" style="padding-top: 50px;">
+                            <p class="blue-7 font-20">Filters</p>
+                            <form action="./movies/apply_filter.php" method="GET">
+                                <p class="grey-4">Genre</p>
+                                <input type="checkbox" name="genre[]" value="Action"> <span class="grey-6">Action</span><br>
+                                <input type="submit" value="Apply">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                    <div>
+                        <p class="page-title">Now Playing</p>
+                    </div>
+                        
+                        <div class="row">
+                            <?php
+                                include 'config.php';
+                                session_start();
+                                $query = "select * from movies";
+                                $movies = $db->query($query);
+                                $no_records = $movies->num_rows;
+                                for ($i=0; $i<$no_records; $i++) {
+                                    $row = $movies->fetch_assoc();
+                                    echo '
+                                        <div class="col-3">
+                                            <div class="movie-card">
+                                                <div class="movie-poster">
+                                                </div>
+                                                <p class="font-16 bold center"><a href="./movies/movie_details.php?movie_id='.$row['id'].'">'.$row['movie_name'].'</a></p>
+                                                <p class="movie-description">Genre: '.$row['genre'].'</p>
+                                                <p class="movie-description">'.$row['description'].'</p>
+                                            </div>
+                                        </div>
+                                    ';
+                                }
+                            ?>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="movie-card">
+                                    <div class="movie-poster">
+                                    </div>
+                                    <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
+                                    <p class="movie-description">Hello</p>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
                </div>
-                
-                <div class="row">
-                    <div class="col-3">
-                        <div class="movie-card">
-                            <div class="movie-poster">
-                            </div>
-                            <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
-                            <p class="movie-description">Hello</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="movie-card">
-                            <div class="movie-poster">
-                            </div>
-                            <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
-                            <p class="movie-description">Hello</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="movie-card">
-                            <div class="movie-poster">
-                            </div>
-                            <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
-                            <p class="movie-description">Hello</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="movie-card">
-                            <div class="movie-poster">
-                            </div>
-                            <p class="font-16 bold center"><a href="#">Paranormal Activity 2</a></p>
-                            <p class="movie-description">Hello</p>
-                        </div>
-                    </div>
-                </div>
+               
            </div>
        </div>
        <div id="main-footer">

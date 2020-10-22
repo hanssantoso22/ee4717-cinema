@@ -23,6 +23,8 @@
     height: 100px;
     background-color: #05396D;
     width: 100%;
+    position: fixed;
+    z-index: 1;
 }
 .navbar {
     height: 30px;
@@ -31,6 +33,7 @@ body {
     background: #F2F2F2;
     margin: 0px;
     font-family: 'lato.regular', Geneva;
+    min-width: 1200px;
 }
 #main-header a:link,
 #main-header a:visited,
@@ -104,10 +107,10 @@ body {
     background-color: white;
     margin-left: auto;
     margin-right: auto;
-    height: 100%;
-}
-html, body {
-    height: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+    height: auto;
+    z-index: -1;
 }
 .page-title {
     font-size: 24px;
@@ -118,6 +121,11 @@ html, body {
     width: 90%;
     margin: auto;
     padding-top: 30px;
+    height: 100%;
+}
+.material-icon {
+    font-family: 'MaterialIcons-Regular';
+    font-size: 24px;
 }
 
 /* FOOTER STYLING */
@@ -263,6 +271,16 @@ html, body {
     color: #5DAAF8;
 }
 
+/* REDS */
+.red-7 {
+    color: #74031E;
+}
+.red-6 {
+    color: #AA042C;
+}
+.red-5 {
+    color: #E1063A;
+}
 /* HEADER TITLE */
 
 h1, h2, h3, h4, h5, h6 {
@@ -282,14 +300,29 @@ h1, h2, h3, h4, h5, h6 {
 #main-body input:focus {
     outline-color: #0755A3;
 }
-#main-body input[type="button" i] .primary{
-    background-color: #0755A3;
-    color: #FFCD1D;
-    padding: 10px 30px;
+#main-body select {
+    padding: 10px;
     border-radius: 5px;
-    border-width: 0px;
-    font-family: 'lato.bold';
-    letter-spacing: 1px;
+    border: 1px solid#AEAEAE;
+    font-family: 'lato.regular';
+    font-size: 16px;
+}
+.primary-btn {
+    background-color: #0755A3 !important;
+    color: #FFCD1D !important;
+    padding: 10px 30px !important;
+    border-radius: 5px !important;
+    border-width: 0px !important;
+    font-family: 'lato.bold' !important;
+}
+.secondary-btn {
+    background-color: transparent !important;
+    color: #0755A3 !important;
+    padding: 10px 30px !important;
+    border-radius: 5px !important;
+    border-width: 1px !important;
+    border-color: #0755A3 !important;
+    font-family: 'lato.bold' !important;
 }
 #main-body input[type="submit" i] {
     background-color: #0755A3;
@@ -299,5 +332,14 @@ h1, h2, h3, h4, h5, h6 {
     border-width: 0px;
     font-family: 'lato.bold';
     letter-spacing: 1px;
+}
+.filters input[type="submit" i] {
+    background-color: transparent !important;
+    color: #0755A3 !important;
+    padding: 10px 30px !important;
+    border-radius: 5px !important;
+    border-width: 1px !important;
+    border-color: #0755A3 !important;
+    font-family: 'lato.bold' !important;
 }
 

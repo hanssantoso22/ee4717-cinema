@@ -1,0 +1,23 @@
+#content-box a:link,
+#content-box a:visited,
+#content-box a:active {
+    text-decoration: none;
+    color: #5C5C5C;
+}
+#content-box a:hover {
+    color: #0755A3;
+}
+
+.description {
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.input-item {
+    text-align: center;
+}
+.seat-plan {
+    height: 200px;
+}
+.hidden-input {
+    display: none;
+}

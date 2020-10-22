@@ -22,11 +22,25 @@
             <div id="content-box">
                 <div>
                     <p class="page-title">Bookings</p>
-                    <p class="grey-4"><em>Search your bookings</em></p>
-                    <form action="retrieve_bookings.php" method="GET">
-                        <input type="email" name="email" style="width: 100%;" placeholder="Enter your email"/>
-                        <p><input type="submit" value="Search"></p>
-                    </form>
+                    <?php
+                        include '../config.php';
+                        $email = $_GET('email');
+                        $query = "select * from orders where email='".$email."';";
+                        $bookings = $db->query($query);
+                        $no_records = $booking->num_rows();
+                        if (!$bookings) {
+                            echo '<p class="grey-4"><em>No bookings found!</em></p>';
+                        }
+                        else {
+                            echo '<table>';
+                            echo '<tr><th>Movie Name</th><th>Show date/time</th><th>Cinema</th><th>Qty</th></tr>';
+                            for ($i=0; $i<$no_records; $i++) {
+                                $rows = $bookings->fetch_assoc();
+                                echo '<tr><td>'.$rows['movie_name'].'</td><td>'.$rows['show_time'].'</td><td>'.$rows['cinema'].'</td><td>'.$rows['qty'].'</td></tr>';
+                            }
+
+                        }
+                    ?>
                 </div>
             </div>
        </div>
