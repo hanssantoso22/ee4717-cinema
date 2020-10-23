@@ -38,13 +38,11 @@
                     if (!isset($_SESSION['cart'])) {
                         $_SESSION['cart'] = array();
                     }
+                    
                     /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
                         As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
                     if (isset($_POST['movie_id'])) {
                         $seats = array();
-                        function push_element (&$array,$item) {
-                            array_push($array,$item);
-                        }
                         for ($i=0;$i<$_POST['qty'];$i++) { //put all seat inputs into an array
                             $num = $i+1;
                             $name = 'seat'.$num;

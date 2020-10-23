@@ -341,5 +341,15 @@ h1, h2, h3, h4, h5, h6 {
     border-width: 1px !important;
     border-color: #0755A3 !important;
     font-family: 'lato.bold' !important;
+    transition: 0.3s;
+}
+.filters input[type="submit"]:hover {
+    background-color: #0755A3 !important;
+    color: white !important;
+    padding: 10px 30px !important;
+    border-radius: 5px !important;
+    border-width: 1px !important;
+    border-color: #0755A3 !important;
+    font-family: 'lato.bold' !important;
 }
 

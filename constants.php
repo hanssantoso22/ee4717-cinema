@@ -31,8 +31,11 @@
         24=>'Joker',
         25=>'Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)',
     ];
+    $GENRE = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Drama', 'Family', 'Fantasy', 'Horror', 'Mystery', 'Science Fiction', 'Thriller'];
     $rows = ["A","B","C"];
     $SEATS = array();
+    $today = date("Y-m-d");
+    $next_week = date('Y-m-d',strtotime("+7 day", strtotime($today)));
     function push_element (&$array, $element) {
         array_push ($array,$element);
     }
@@ -42,5 +45,18 @@
             push_element($SEATS,$seat);
         }
     }
-
+    function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d' ) {
+        $dates = array();
+        $current = strtotime( $first );
+        $last = strtotime( $last );
+    
+        while( $current <= $last ) {
+    
+            $dates[] = date( $format, $current );
+            $current = strtotime( $step, $current );
+        }
+    
+        return $dates;
+    }
+    $DATE_RANGE = dateRange ($today, $next_week);
 ?>

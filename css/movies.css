@@ -7,6 +7,7 @@
     margin-bottom: 30px;
     padding: 10px;
     transition: 300ms;
+    height: 450px;
 }
 .movie-card a:link,
 .movie-card a:visited,
@@ -27,6 +28,11 @@
     font-weight: 400px;
     letter-spacing: 1px;
     color: #AEAEAE;
+}
+.brief-caption {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 65px;
 }
 .movie-poster {
     width: 100%;
