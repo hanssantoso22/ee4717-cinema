@@ -49,7 +49,7 @@
                             echo '
                                 <p class="grey-5" >Genre:</p><p class="grey-7 description" >'.$row['genre'].'</p><br>
                                 <p class="grey-5" >Description: </p>
-                                <p class="grey-7 description" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.$row['description'].'</p>
+                                <p class="grey-7 description" >'.$row['description'].'</p>
                             '
                         ?>
                         <br>
@@ -76,6 +76,9 @@
                                 <div class="col-3 input-item">
                                     <select name="time">
                                         <?php
+                                            $query = 'select * from movsessions where movie_id='.$movie_id.';';
+                                            $movie_sessions = $db->query($query);
+                                            
                                             $timings = ["12:00","15:00","16:00"];
                                             foreach ($timings as $item) { //create dropdown options from an array
                                                 if ($item==$time) {
