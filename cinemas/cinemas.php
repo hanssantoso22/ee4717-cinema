@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Booking Cart
+           Cine 23 - Cinema
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="cinemas.css">
@@ -28,7 +28,11 @@
 						<div id="cin-pic">
 						<img src="downtown-theatre.png" alt="Downtown Theatre" style="width:auto;" width="200" height="200" usemap="#dwt">
 						<map name="dwt">
+<<<<<<< Updated upstream
 							<area shape="rect" coords="0,0,200,200" href="cinema_downtown.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=2" alt="Link">
+>>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
@@ -45,7 +49,11 @@
 						<div id="cin-pic">
 						<img src="marina-theatre.jpg" alt="Marina Theatre" style="width:auto;" width="200" height="200" usemap="#mar">
 						<map name="mar">
+<<<<<<< Updated upstream
 							<area shape="rect" coords="0,0,200,200" href="cinema_marina.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=1" alt="Link">
+>>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
@@ -63,7 +71,11 @@
 						<div id="cin-pic">
 						<img src="royal-theatre.jpg" alt="Royal Theatre" style="width:auto;" width="200" height="200" usemap="#roy">
 						<map name="roy">
+<<<<<<< Updated upstream
 							<area shape="rect" coords="0,0,200,200" href="cinema_royal.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=3" alt="Link">
+>>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
