@@ -2,10 +2,10 @@
 <html>
    <head>
        <title>
-           Cine 23 - Booking Cart
+           Cine 23 - Cinema
        </title>
        <link rel="stylesheet" href="../css/main.css">
-       <link rel="stylesheet" href="bookings.css">
+       <link rel="stylesheet" href="cinemas.css">
    </head>
    <body>
        <div id="main-header">
@@ -23,6 +23,71 @@
                 <div>
                     <p class="page-title">Cinemas</p>
                 </div>
+				<div class="row">
+					<div class="col-3">
+						<div id="cin-pic">
+						<img src="downtown-theatre.png" alt="Downtown Theatre" style="width:auto;" width="200" height="200" usemap="#dwt">
+						<map name="dwt">
+<<<<<<< Updated upstream
+							<area shape="rect" coords="0,0,200,200" href="cinema_downtown.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=2" alt="Link">
+>>>>>>> Stashed changes
+						</map>
+						</div>
+						<div style="height:50px;">
+						</div>
+					</div>
+					<div class="col-3">
+						<h3>Downtown</h3>
+						<p class="cin-text">12 Alme Street<br>
+											New Carolina NC 27665-8868<br>
+											NSA<br>
+											Tel:189-777-236</p>
+					</div>
+					<div class="col-3">
+						<div id="cin-pic">
+						<img src="marina-theatre.jpg" alt="Marina Theatre" style="width:auto;" width="200" height="200" usemap="#mar">
+						<map name="mar">
+<<<<<<< Updated upstream
+							<area shape="rect" coords="0,0,200,200" href="cinema_marina.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=1" alt="Link">
+>>>>>>> Stashed changes
+						</map>
+						</div>
+						<div style="height:50px;">
+						</div>
+					</div>
+					<div class="col-3">
+						<h3>Marina</h3>
+						<p class="cin-text">20 Fifth Marina Avenue<br>
+											Termasek 978054<br>
+											Tel:9984 3636</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<div id="cin-pic">
+						<img src="royal-theatre.jpg" alt="Royal Theatre" style="width:auto;" width="200" height="200" usemap="#roy">
+						<map name="roy">
+<<<<<<< Updated upstream
+							<area shape="rect" coords="0,0,200,200" href="cinema_royal.php" alt="Link">
+=======
+							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=3" alt="Link">
+>>>>>>> Stashed changes
+						</map>
+						</div>
+						<div style="height:50px;">
+						</div>
+					</div>
+					<div class="col-3">
+						<h3>Royal</h3>
+						<p class="cin-text">2-7-6 Nakacho, Nishi-ku<br>
+											Umeruzawa 273-8888<br>
+											Tel:03-1194-8471</p>
+					</div>
+				</div>
             </div>
        </div>
        <div id="main-footer">

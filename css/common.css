@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'MaterialIcons-Regular';
+    font-style: normal;
+    src: url(../assets/fonts/MaterialIcons-Regular.ttf)
+}
+@font-face {
+    font-family: 'lato.regular';
+    font-style: normal;
+    src: url(../assets/fonts/lato.regular.ttf)
+}
+@font-face {
+    font-family: 'lato.bold';
+    font-style: normal;
+    src: url(../assets/fonts/lato.bold.ttf)
+}
+.input {
+
+}
