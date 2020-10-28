@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Home
+           Max Vision - Home
        </title>
        <link rel="stylesheet" href="./css/main.css">
        <link rel="stylesheet" href="./css/movies.css">
@@ -56,6 +56,7 @@
                                         <div class="col-3">
                                             <div class="movie-card">
                                                 <div class="movie-poster">
+                                                    <img class="poster" src=".'.$row['picture_url'].'">
                                                 </div>
                                                 <div class="short-details">
                                                     <p class="font-16 bold center"><a href="./movies/movie_details.php?movie_id='.$row['id'].'">'.$row['movie_name'].'</a></p>

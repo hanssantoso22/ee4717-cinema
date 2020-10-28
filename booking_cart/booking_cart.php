@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Booking Cart
+           Max Vision - Booking Cart
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="booking_cart.css">
@@ -28,7 +28,7 @@
                     include '../constants.php';
                     session_start();
                     $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
-                    $total = 0.00;
+                    $_SESSION['total'] = 0.00;
                     function addTotalPrice (&$total_price,$subtotal) {
                         $total_price+=$subtotal;
                     }
@@ -38,7 +38,6 @@
                     if (!isset($_SESSION['cart'])) {
                         $_SESSION['cart'] = array();
                     }
-                    
                     /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
                         As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
                     if (isset($_POST['movie_id'])) {
@@ -50,12 +49,13 @@
                         }
                         // to check if it's an edit mode
                         if ($_POST['edit']!="") {
-                            $_SESSION['cart'][$_POST['edit']] = ['movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats];
+                            $_SESSION['cart'][$_POST['edit']] = ['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats];
                         }
                         else {
-                            push_element($_SESSION['cart'],['movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
+                            push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
                         }
                     }
+                    
                     if (count($_SESSION['cart'])>0) {
                         echo '
                             <div class="row">
@@ -65,14 +65,24 @@
                         
                         for ($i=0; $i<count($_SESSION['cart']); $i++) { //iterating thorugh each order item
                             $array = $_SESSION['cart'][$i];
+                            $movie_session_id = $array['movie_session_id'];
                             $movie_name = $MOVIES[$array['movie_id']];
                             $cinema_name = $CINEMAS[$array['cinema_id']];
                             $datetime = date("d-m-Y",strtotime($array['date'])).' '.$array['time'];
                             $query = 'select * from movsessions where movie_id='.$array['movie_id'].' and cinema_id='.$array['cinema_id'];
+                            $price_query = 'select price from movsessions where id='.$movie_session_id.';';
+                            $image_url_query = 'select * from movies where id='.$array['movie_id'];
+                            $price_result = $db->query($price_query);
+                            $url_result = $db->query($image_url_query);
+                            $price_row = $price_result->fetch_assoc();
+                            $url_row = $url_result->fetch_assoc();
+                            $subtotal = $price_row['price'] * $array['qty'];
+                            $subtotal_formatted = number_format($subtotal,2,'.',',');
+                            addTotalPrice($_SESSION['total'],$subtotal);
                             echo '
                                 <div class="row order-card" >
-                                    <div class="col-3 movie-poster">
-                                        
+                                    <div class="col-3 poster-container">
+                                        <img src="..'.$url_row['picture_url'].'" class="poster">
                                     </div>
                                     <div class="col-6">
                                         <h3>'.$movie_name.'</h3>
@@ -91,14 +101,14 @@
                                             </div>
                                             <div class="col-2">
                                                 <p class="grey-3" >Subtotal: </p>
-                                                <p class="grey-5 description" >'.$array['qty'].'</p>
+                                                <p class="grey-5 description" >$'.$subtotal_formatted.'</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-1"></div>
                                     <div class="col-1" >
                                         <div class="icon-container material-icon delete-icon">
-                                            <a href="delete_item.php?delete='.$i.'">delete</a>
+                                            <a href="delete_item.php?delete='.$i.'&subtotal='.$subtotal.'">delete</a>
                                         </div> 
                                     </div>
                                     <div class="col-1" >
@@ -118,7 +128,7 @@
                                             <table class="font-16 grey-5" style="width: 100%;">
                                                 <tr>
                                                     <td>TOTAL</td>
-                                                    <td class="right bold blue-7 font-24">$30.00</td>
+                                                    <td class="right bold blue-7 font-24">$'.number_format($_SESSION['total'],2,'.',',').'</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">

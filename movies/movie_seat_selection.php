@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Home
+           Max Vision - Home
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="movie_details.css">
@@ -10,7 +10,7 @@
    <body>
        <div id="main-header">
            <div class="row">
-               <div class="col-2"><a href="index.php" ><img class="cinema-name" src="../assets/common/logo2.png"></a></div>
+               <div class="col-2"><a href="../index.php" ><img class="cinema-name" src="../assets/common/logo2.png"></a></div>
                <div class="col-2"><a class="tab active" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
@@ -23,10 +23,14 @@
                 <?php
                     session_start();
                     include '../config.php';
-                    $movie_id = $_GET['movie_id'];
-                    $date = $_GET['date'];
-                    $timing = $_GET['time'];
-                    $cinema_id = $_GET['cinema_id'];
+                    $movie_session_id = $_GET['movie_session_id'];
+                    $movie_details_query = 'SELECT * FROM movsessions WHERE id='.$movie_session_id.';';
+                    $results = $db->query($movie_details_query);
+                    $detail = $results->fetch_assoc();
+                    $movie_id = $detail['movie_id'];
+                    $date = explode(' ',$detail['timing'])[0];
+                    $timing = explode(' ',$detail['timing'])[1];
+                    $cinema_id = $detail['cinema_id'];
                     $qty = $_GET['qty'];
                     $query = 'select * from movies where id='.$movie_id.';';
                     $movie_details = $db->query($query);
@@ -55,7 +59,7 @@
                             '
                         ?>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" style="padding-left: 20px;">
                         <p class="blue-7 font-24">Seat Selection</p>
                         <div class="row">
                             <?php
@@ -84,10 +88,15 @@
                         <form action="../booking_cart/booking_cart.php" method="POST">
                             <div class="row">
                                 <?php
-                                    $seats = ["A1","A2","A3","C5","C6"];
+                                    // RETRIEVE TAKEN SEATS FROM DATABASE
+                                    $movsess_detail_query = "select * FROM movsessions WHERE id=".$movie_session_id.";";
+                                    $detail_result = $db->query($movsess_detail_query);
+                                    $row = $detail_result->fetch_assoc();
+                                    $occupied_seats = explode(",",$row['taken_seats']);
                                     //passing all input data from the previous page (date selection) to the next page (booking cart) via POST method
                                     echo '
                                         <input type="text" name="movie_id" class="hidden-input" value="'.$movie_id.'">
+                                        <input type="text" name="movie_session_id" class="hidden-input" value="'.$movie_session_id.'">
                                         <input type="text" name="date" class="hidden-input" value="'.$date.'">
                                         <input type="text" name="time" class="hidden-input" value="'.$timing.'">
                                         <input type="text" name="cinema_id" class="hidden-input" value="'.$cinema_id.'">
@@ -105,10 +114,17 @@
                                         echo '
                                             <select name="seat'.$num.'" id="seat'.$num.'">
                                         ';
-                                        foreach ($seats as $item) {
-                                            echo '
-                                                <option value="'.$item.'">'.$item.'</option>
-                                            ';
+                                        foreach ($SEATS as $item) {
+                                            if (in_array($item,$occupied_seats)) {
+                                                echo '
+                                                    <option value="'.$item.'" disabled>'.$item.'</option>
+                                                ';
+                                            }
+                                            else {
+                                                echo '
+                                                    <option value="'.$item.'">'.$item.'</option>
+                                                ';
+                                            }
                                         }
                                         echo '</select></div>'; 
                                     }

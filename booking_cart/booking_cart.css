@@ -41,3 +41,13 @@ td {
     text-decoration: none;
     color: #D6D5D5;
 }
+.poster {
+    height: 150px;
+    vertical-align: middle;
+}
+.poster-container {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    height: 100%;
+}
