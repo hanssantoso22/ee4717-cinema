@@ -21,3 +21,15 @@
 .hidden-input {
     display: none;
 }
+.poster {
+    width: 90%;
+    margin: 20px;
+}
+table, td, th {
+    border: 1px solid #D6D5D5;
+    border-collapse: collapse;
+}
+td, th {
+    padding: 15px;
+    min-width: 70px;
+}
