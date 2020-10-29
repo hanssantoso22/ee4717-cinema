@@ -20,13 +20,18 @@
        </div>
        <div id="main-body">
             <div id="content-box">
-                <div>
+            <?php
+			session_start();
+			if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+			{
+				echo '
+				<div>
                     <p class="page-title">Tickets</p>
-                </div>
-                <?php
+                </div>';
+                
                     include '../config.php';
                     include '../constants.php';
-                    session_start();
+                    
                     $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
                     $total = 0.00;
                     function addTotalPrice (&$total_price,$subtotal) {
@@ -175,9 +180,16 @@
                         ';
                     }
                     
-                ?>
-            <!-- closing tag for content-box -->
+                
+            // closing tag for content-box
+				echo '
                 <a href="empty_cart.php">Empty Cart</a>
+				';
+			}	
+			else
+			{
+				header("location:../login/login.php");
+			} ?>
             </div>               
        </div>
        <div id="main-footer">
