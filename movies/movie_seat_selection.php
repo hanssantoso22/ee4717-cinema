@@ -84,8 +84,11 @@
                         
                         <br>
                         <p class="grey-5" >Seat(s): </p>
-                        <img class="seat-plan">
-                        <form action="../booking_cart/booking_cart.php" method="POST">
+                        <p id="seat-warning" class="seat-warning"><em>Chosen seats must not be the same!</em></p>
+                        <div class="seat-plan-container">
+                            <img src="../assets/img/seat_planning.png" class="seat-plan">
+                        </div>
+                        <form id="seatSelectionForm" action="../booking_cart/booking_cart.php" method="POST">
                             <div class="row">
                                 <?php
                                     // RETRIEVE TAKEN SEATS FROM DATABASE
@@ -100,7 +103,7 @@
                                         <input type="text" name="date" class="hidden-input" value="'.$date.'">
                                         <input type="text" name="time" class="hidden-input" value="'.$timing.'">
                                         <input type="text" name="cinema_id" class="hidden-input" value="'.$cinema_id.'">
-                                        <input type="text" name="qty" class="hidden-input" value="'.$qty.'">
+                                        <input type="text" id="qty" name="qty" class="hidden-input" value="'.$qty.'">
                                     ';
                                     if ($_GET['edit']!=NULL) {
                                         echo '<input type="text" name="edit" class="hidden-input" value="'.$_GET['edit'].'">';
@@ -112,7 +115,8 @@
                                             <p class="grey-5">Seat '.$num.'</p>
                                         ';
                                         echo '
-                                            <select name="seat'.$num.'" id="seat'.$num.'">
+                                            <select name="seat'.$num.'" id="seat'.$num.'" required>
+                                            <option disabled selected value="none">Select</option> 
                                         ';
                                         foreach ($SEATS as $item) {
                                             if (in_array($item,$occupied_seats)) {
@@ -131,7 +135,7 @@
                                 ?>
                             </div>
                             <br><br>
-                            <input type="submit" value="PROCEED">
+                            <input type="submit" value="PROCEED" style="display: inline;"><p id="submit-warning" class="submit-warning"><em>&nbsp;&nbsp;&nbsp;&nbsp;Please select all seats or choose different seats!</em></p>
                         </form>
                     </div>
                 </div>
@@ -141,5 +145,6 @@
            <p>&#169; Max Vision 2020</p>
        </div>
        <script src="../js/header.js"></script>
+       <script src="./seat_selection.js"></script>
    </body> 
 </html>
