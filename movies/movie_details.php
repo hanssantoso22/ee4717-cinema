@@ -56,7 +56,7 @@
                         <p class="grey-5" >Buy ticket(s) </p>
                         <form action="movie_seat_selection.php" method="GET">
                         <?php
-                            echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
+                            echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" required value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
                         ?>
                         <p class="grey-5">Choose schedule: </p>
                         <table>
@@ -79,6 +79,11 @@
                             $movie_name = $db->query($query2);
                             $movie_row=0;
                             $row = $movie_sess->fetch_assoc();
+                            if ($_GET['edit']!=NULL) {
+                                echo '
+                                    <input type="text" name="edit" class="hidden-input" value="'.$_GET['edit'].'">
+                                ';
+                            }
                             while ($row2 = $movie_name->fetch_assoc()){
                                 $movie_row=$row2['id'];
                                 if ($movie_row==$row['cinema_id']){
@@ -87,7 +92,7 @@
                                     for ($x=0;$x<7;$x++){
                                         echo'<td>';										
                                         while ($day[$x]==$row['date']){	
-                                            echo '<input type="radio" name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
+                                            echo '<input type="radio" required name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
                                             global $row;
                                             $row = $movie_sess->fetch_assoc();							
                                         }									

@@ -55,7 +55,6 @@
                             push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
                         }
                     }
-                    
                     if (count($_SESSION['cart'])>0) {
                         echo '
                             <div class="row">
@@ -124,7 +123,7 @@
                                 <div class="col-4">
                                     <div id="payment-summary-card">
                                         <h2>Payment</h2>
-                                        <form action="booking_cart_confirmation_card.php" method="POST">
+                                        <form id="payment-form" action="booking_cart_confirmation_card.php" method="POST">
                                             <table class="font-16 grey-5" style="width: 100%;">
                                                 <tr>
                                                     <td>TOTAL</td>
@@ -132,14 +131,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">
-                                                        NAME <br><br>
-                                                        <input type="text" placeholder="Full Name" name="fname" style="width: 95%;">
+                                                        E-MAIL <br><br>
+                                                        <input type="email" placeholder="E-mail" id="email" name="email" style="width: 95%;" required>
+                                                        <p id="email-warning" class="hidden-message">Invalid e-mail</p>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">
                                                         PAYMENT METHOD<br><br>
-                                                        <input type="radio" name="payment" value="Credit Card" ><span class="blue-7"> Credit Card</span>
+                                                        <input type="radio" required name="payment" value="Credit Card" ><span class="blue-7"> Credit Card</span>
                                                     </td>
                                                 </tr>                           
                                             </table>
@@ -148,23 +148,27 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             Name on card <br><br>
-                                                            <input type="text" placeholder="Name" name="cardname" style="width: 95%;">
+                                                            <input type="text" placeholder="Name" id="cardname" name="cardname" style="width: 95%;" maxlength="200" required>
+                                                            <p id="cardname-warning" class="hidden-message">Only alphabets are allowed</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">
                                                             Card number <br><br>
-                                                            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" name="cardnumber" style="width: 95%;">
+                                                            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" id="cardnumber" name="cardnumber" style="width: 95%;" maxlength="12" required>
+                                                            <p id="cardnumber-warning" class="hidden-message">Only digits. Make sure it contains 12 digits</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             Expiry date <br><br>
-                                                            <input type="date" name="expirydate">
+                                                            <input type="date" id="expirydate" name="expirydate" required>
+                                                            <p id="expirydate-warning" class="hidden-message-2" >Card is expired</p>
                                                         </td>
                                                         <td >
                                                             CVV <br><br>
-                                                            <input type="password" name="cvv" style="width: 40px;">
+                                                            <input type="password" id="cvv" name="cvv" style="width: 40px;" maxlength="3" required>
+                                                            <p id="cvv-warning" class="hidden-message-2">Input 3 digits</p>
                                                         </td>
                                                     </tr>
                                                 </table>

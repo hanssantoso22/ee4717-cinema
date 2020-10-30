@@ -33,3 +33,19 @@ td, th {
     padding: 15px;
     min-width: 70px;
 }
+.seat-plan-container {
+    text-align: center;
+    height: 200px;
+}
+.seat-plan {
+    text-align: center;
+    height: 200px;
+}
+.seat-warning {
+    color:#E1063A;
+    display: none;
+}
+.submit-warning {
+    display: none;
+    color:#E1063A;
+}
