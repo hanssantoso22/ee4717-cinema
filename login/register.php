@@ -3,8 +3,8 @@
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $fname = $email = "";
+$username_err = $password_err = $confirm_password_err = $fname_err = $email_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -41,7 +41,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->close();
         }
     }
-    
+
+    // Validate email
+    if(empty(trim($_POST["e_mail"]))){
+        $email_err = "Please enter an email.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE email = ?";
+        
+        if($stmt = $db->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("s", $param_email);
+            
+            // Set parameters
+            $param_email = trim($_POST["e_mail"]);
+            
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+                
+                if($stmt->num_rows == 1){
+                    $email_err = "This email is already taken.";
+                } else{
+                    $email = trim($_POST["e_mail"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+	
+	// Validate fname
+    if(empty(trim($_POST["fname"]))){
+        $fname_err = "Please enter your name.";     
+    } else{
+        $fname = trim($_POST["fname"]);
+    }
+     
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";     
@@ -65,15 +105,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username, password, email, fname) VALUES (?, ?, ?, ?)";
          
         if($stmt = $db->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_username, $param_password);
+            $stmt->bind_param("ssss", $param_username, $param_password, $param_email, $param_fname);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+			$param_email = $email;
+			$param_fname = $fname;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -117,6 +159,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<h2>Sign Up</h2>
 					<p>Please fill this form to create an account.</p>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+							<label>Email</label>
+							<input type="email" name="e_mail" class="form-control" value="<?php echo $email; ?>">
+							<span class="help-block"><?php echo $email_err; ?></span>
+						</div> 
+						<div class="form-group <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
+							<label>Full Name</label>
+							<input type="text" name="fname" class="form-control" value="<?php echo $fname; ?>">
+							<span class="help-block"><?php echo $fname_err; ?></span>
+						</div> 
 						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
 							<label>Username</label>
 							<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">

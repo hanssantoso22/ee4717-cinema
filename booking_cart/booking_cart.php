@@ -14,7 +14,7 @@
                <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
+               <div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
                <div class="col-2"><a class="cart" href="booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
