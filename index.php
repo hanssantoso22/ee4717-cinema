@@ -9,14 +9,28 @@
    </head>
    <body>
        <div id="main-header">
-           <div class="row">
-               <div class="col-2"><a href="index.php" ><img class="cinema-name" src="assets/common/logo2.png"></a></div>
-               <div class="col-2"><a class="tab active" href="index.php">MOVIES</a></div>
-               <div class="col-2"><a class="tab" href="./cinemas/cinemas.php">CINEMAS</a></div>
-               <div class="col-2"><a class="tab" href="./bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
-               <div class="col-2"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
-           </div>
+            <div class="row">
+                <div class="col-2"><a href="index.php" ><img class="cinema-name" src="assets/common/logo2.png"></a></div>
+                <div class="col-2"><a class="tab active" href="index.php">MOVIES</a></div>
+                <div class="col-2"><a class="tab" href="./cinemas/cinemas.php">CINEMAS</a></div>
+                <div class="col-2"><a class="tab" href="./bookings/bookings.php">BOOKINGS</a></div>
+                <?php
+                    session_start();
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+                    {	
+                        echo'<div class="col-3 login-container"><a href="./login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>
+                            '
+                        ;
+                    }
+                    else
+                    {	
+                        echo'<div class="col-3 login-container"><a class="login" href="./login/login.php">account_circle</a></div>
+                            '
+                        ;
+                    }
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
+            </div>
        </div>
        <div id="main-body">
            <div id="content-box">
@@ -29,7 +43,6 @@
                                 <?php
                                     include 'config.php';
                                     include 'constants.php';
-                                    session_start();
                                     foreach ($GENRE as $item) {
                                         echo '
                                             <input type="checkbox" name="genre[]" value="'.$item.'"> <span class="grey-6">'.$item.'</span><br><br>
