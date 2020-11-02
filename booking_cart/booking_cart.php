@@ -21,7 +21,7 @@
        <div id="main-body">
             <div id="content-box">
                 <?php
-                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID'])) {
+                    if(true) {
                         echo '
                             <div>
                                 <p class="page-title">Tickets</p>
@@ -43,8 +43,11 @@
                         }
                         /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
                             As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
-                        if (isset($_POST['movie_id'])) {
+                        if (isset($_POST['movie_session_id'])) {
                             $seats = array();
+                            function filter ($array) {
+                                return $array['movie_session_id'] == $_POST['movie_session_id'];
+                            }
                             for ($i=0;$i<$_POST['qty'];$i++) { //put all seat inputs into an array
                                 $num = $i+1;
                                 $name = 'seat'.$num;
@@ -55,7 +58,9 @@
                                 $_SESSION['cart'][$_POST['edit']] = ['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats];
                             }
                             else {
-                                push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
+                                if (count(array_filter($_SESSION['cart'],'filter'))==0) {
+                                    push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
+                                } 
                             }
                         }
                         if (count($_SESSION['cart'])>0) {
