@@ -1,8 +1,8 @@
 <?php
     $server = 'localhost';
-    $username = 'root';
-    $password = 'root';
-    $db_name = 'max-vision';
+    $username = 'f35ee';
+    $password = 'f35ee';
+    $db_name = 'f35ee';
     $db = new mysqli($server,$username,$password,$db_name);
-    $url = 'http://localhost:8888';
+    $url = 'http://localhost';
 ?>

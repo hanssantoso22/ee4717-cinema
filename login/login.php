@@ -12,7 +12,7 @@ if(isset($_SESSION['SESS_MEMBER_ID']) && $_SESSION['SESS_MEMBER_ID'] === true){
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$username = $password = "";
+$username = $password = $id = $fname = $email = "";
 $username_err = $password_err = "";
  
 // Processing form data when form is submitted
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        $sql = "SELECT id, username, password, fname, email FROM users WHERE username = ?";
         
         if($stmt = $db->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if($stmt->num_rows == 1){                    
                     // Bind result variables
-                    $stmt->bind_result($id, $username, $hashed_password);
+                    $stmt->bind_result($id, $username, $hashed_password, $fname, $email);
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -61,7 +61,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["SESS_MEMBER_ID"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username; 
+							$_SESSION["fname"] = $fname;
+							$_SESSION["email"] = $email;
                             
                             // Redirect user to welcome page
                             header("location: ../index.php");

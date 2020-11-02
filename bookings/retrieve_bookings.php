@@ -15,16 +15,21 @@
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab active" href="bookings.php">BOOKINGS</a></div>
                <?php
-				session_start();
-				if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
-				{	echo'<div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
-						 ';
-				}
-				else
-				{	echo'<div class="col-2"><a class="tab" href="../login/login.php">LOGIN</a></div>
-						 ';
-				}?>
-               <div class="col-2"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
+                    session_start();
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+                    {	
+                        echo'<div class="col-3 login-container"><a href="../login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>
+                            '
+                        ;
+                    }
+                    else
+                    {	
+                        echo'<div class="col-3 login-container"><a class="login" href="../login/login.php">account_circle</a></div>
+                            '
+                        ;
+                    }
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
@@ -33,8 +38,8 @@
                     <p class="page-title">Bookings</p>
                     <?php
                         include '../config.php';
-                        $email = $_GET('email');
-                        $query = "select * from orders where email='".$email."';";
+                        $id = $_SESSION["SESS_MEMBER_ID"];
+                        $query = "select * from orders where user_id='".$id."';";
                         $bookings = $db->query($query);
                         $no_records = $booking->num_rows();
                         if (!$bookings) {

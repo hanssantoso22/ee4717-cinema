@@ -14,44 +14,28 @@
                <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
-               <div class="col-2"><a class="cart" href="booking_cart.php">shopping_cart</a></div>
+               <?php
+                    session_start();
+                    echo'<div class="col-3 login-container"><a href="../login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>';
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
             <div id="content-box">
-            <?php
-			session_start();
-			if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
-			{
-				echo '
-				<div>
-                    <p class="page-title">Tickets</p>
-                </div>';
-                
-                    include '../config.php';
-                    include '../constants.php';
-                    
-                    $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
-                    $total = 0.00;
-                    function addTotalPrice (&$total_price,$subtotal) {
-                        $total_price+=$subtotal;
-                    }
-                    function subtractTotalPrice (&$total_price,$subtotal) {
-                        $total_price-=$subtotal;
-                    }
-                    if (!isset($_SESSION['cart'])) {
-                        $_SESSION['cart'] = array();
-                    }
-                    
-                    /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
-                        As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
-                    if (isset($_POST['movie_id'])) {
-                        $seats = array();
-                        for ($i=0;$i<$_POST['qty'];$i++) { //put all seat inputs into an array
-                            $num = $i+1;
-                            $name = 'seat'.$num;
-                            push_element($seats,$_POST[$name]);
+                <?php
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID'])) {
+                        echo '
+                            <div>
+                                <p class="page-title">Tickets</p>
+                            </div>
+                        ';
+                        include '../config.php';
+                        include '../constants.php';                        
+                        $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
+                        $_SESSION['total'] = 0.00;
+                        function addTotalPrice (&$total_price,$subtotal) {
+                            $total_price+=$subtotal;
                         }
                         function subtractTotalPrice (&$total_price,$subtotal) {
                             $total_price-=$subtotal;
@@ -61,8 +45,11 @@
                         }
                         /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
                             As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
-                        if (isset($_POST['movie_id'])) {
+                        if (isset($_POST['movie_session_id'])) {
                             $seats = array();
+                            function filter ($array) {
+                                return $array['movie_session_id'] == $_POST['movie_session_id'];
+                            }
                             for ($i=0;$i<$_POST['qty'];$i++) { //put all seat inputs into an array
                                 $num = $i+1;
                                 $name = 'seat'.$num;
@@ -73,7 +60,9 @@
                                 $_SESSION['cart'][$_POST['edit']] = ['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats];
                             }
                             else {
-                                push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
+                                if (count(array_filter($_SESSION['cart'],'filter'))==0) {
+                                    push_element($_SESSION['cart'],['movie_session_id'=>$_POST['movie_session_id'],'movie_id'=>$_POST['movie_id'],'date'=>$_POST['date'],'time'=>$_POST['time'],'cinema_id'=>$_POST['cinema_id'],'qty'=>$_POST['qty'],'seats'=>$seats]);
+                                } 
                             }
                         }
                         if (count($_SESSION['cart'])>0) {
@@ -153,7 +142,7 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             E-MAIL <br><br>
-                                                            <input type="email" placeholder="E-mail" id="email" name="email" style="width: 95%;" required>
+                                                            <input type="email" value='.$_SESSION["email"].' id="email" name="email" style="width: 95%;" required>
                                                             <p id="email-warning" class="hidden-message">Invalid e-mail</p>
                                                         </td>
                                                     </tr>
@@ -215,16 +204,9 @@
                     }
                     else {
                         header("location:../login/login.php");
-                    }                   
-            // closing tag for content-box
-				echo '
-                <a href="empty_cart.php">Empty Cart</a>
-				';
-			}	
-			else
-			{
-				header("location:../login/login.php");
-			} ?>
+                    }
+                ?>
+            <!-- closing tag for content-box -->
             </div>               
        </div>
        <div id="main-footer">
