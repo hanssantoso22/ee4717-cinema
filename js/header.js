@@ -2,7 +2,6 @@ var header = document.getElementById("main-header");
 var active_tab = header.getElementsByClassName("tab active");
 active_tab = active_tab[0];
 var btns = header.getElementsByClassName("tab");
-console.log(btns);
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function() {
   var current = document.getElementsByClassName("active");

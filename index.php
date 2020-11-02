@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Home
+           Max Vision - Home
        </title>
        <link rel="stylesheet" href="./css/main.css">
        <link rel="stylesheet" href="./css/movies.css">
@@ -44,9 +44,16 @@
                                     include 'config.php';
                                     include 'constants.php';
                                     foreach ($GENRE as $item) {
-                                        echo '
-                                            <input type="checkbox" name="genre[]" value="'.$item.'"> <span class="grey-6">'.$item.'</span><br><br>
-                                        ';
+                                        if (in_array($item,explode(",",$_GET['genres']))) {
+                                            echo '
+                                                <input type="checkbox" name="genre[]" value="'.$item.'" checked> <span class="grey-6">'.$item.'</span><br><br>
+                                            ';
+                                        }
+                                        else {
+                                            echo '
+                                                <input type="checkbox" name="genre[]" value="'.$item.'"> <span class="grey-6">'.$item.'</span><br><br>
+                                            ';
+                                        }
                                     }
                                 ?>
                                 <input type="submit" value="Apply">
@@ -60,7 +67,27 @@
                         
                         <div class="row">
                             <?php
-                                $query = "select * from movies";
+                                $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
+                                if (isset($_GET['genres'])) {
+                                    $genres = explode(",",$_GET['genres']);
+                                    $query = 'select * from movies where ';
+                                    function concatenateText (&$text,$new_string) {
+                                        $text = $text.$new_string;
+                                    }
+                                    for ($i=0;$i<count($genres);$i++) {
+                                        if ($i==0) {
+                                            $additional_filter = "genre1='".$genres[$i]."' or genre2='".$genres[$i]."' or genre3='".$genres[$i]."' or genre4='".$genres[$i]."' or genre5='".$genres[$i]."' ";
+                                        }
+                                        else {
+                                            $additional_filter = "or genre1='".$genres[$i]."' or genre2='".$genres[$i]."' or genre3='".$genres[$i]."' or genre4='".$genres[$i]."' or genre5='".$genres[$i]."' ";
+                                        }
+                                        concatenateText($query,$additional_filter);
+                                    }
+                                }
+                                else {
+                                    $query = "select * from movies";
+                                }
+                                
                                 $movies = $db->query($query);
                                 $no_records = $movies->num_rows;
                                 for ($i=0; $i<$no_records; $i++) {
@@ -69,6 +96,7 @@
                                         <div class="col-3">
                                             <div class="movie-card">
                                                 <div class="movie-poster">
+                                                    <img class="poster" src=".'.$row['picture_url'].'">
                                                 </div>
                                                 <div class="short-details">
                                                     <p class="font-16 bold center"><a href="./movies/movie_details.php?movie_id='.$row['id'].'">'.$row['movie_name'].'</a></p>

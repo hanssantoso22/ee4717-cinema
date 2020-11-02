@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Home
+           Max Vision - Home
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="movie_details.css">
@@ -10,7 +10,7 @@
    <body>
        <div id="main-header">
            <div class="row">
-               <div class="col-2"><a href="index.php" ><img class="cinema-name" src="../assets/common/logo2.png"></a></div>
+               <div class="col-2"><a href="../index.php" ><img class="cinema-name" src="../assets/common/logo2.png"></a></div>
                <div class="col-2"><a class="tab active" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
@@ -36,10 +36,14 @@
            <div id="content-box">
                 <?php
                     include '../config.php';
-                    $movie_id = $_GET['movie_id'];
-                    $date = $_GET['date'];
-                    $timing = $_GET['time'];
-                    $cinema_id = $_GET['cinema_id'];
+                    $movie_session_id = $_GET['movie_session_id'];
+                    $movie_details_query = 'SELECT * FROM movsessions WHERE id='.$movie_session_id.';';
+                    $results = $db->query($movie_details_query);
+                    $detail = $results->fetch_assoc();
+                    $movie_id = $detail['movie_id'];
+                    $date = explode(' ',$detail['timing'])[0];
+                    $timing = explode(' ',$detail['timing'])[1];
+                    $cinema_id = $detail['cinema_id'];
                     $qty = $_GET['qty'];
                     $query = 'select * from movies where id='.$movie_id.';';
                     $movie_details = $db->query($query);
@@ -68,7 +72,7 @@
                             '
                         ?>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" style="padding-left: 20px;">
                         <p class="blue-7 font-24">Seat Selection</p>
                         <div class="row">
                             <?php
@@ -93,18 +97,26 @@
                         
                         <br>
                         <p class="grey-5" >Seat(s): </p>
-                        <img class="seat-plan">
-                        <form action="../booking_cart/booking_cart.php" method="POST">
+                        <p id="seat-warning" class="seat-warning"><em>Chosen seats must not be the same!</em></p>
+                        <div class="seat-plan-container">
+                            <img src="../assets/img/seat_planning.png" class="seat-plan">
+                        </div>
+                        <form id="seatSelectionForm" action="../booking_cart/booking_cart.php" method="POST">
                             <div class="row">
                                 <?php
-                                    $seats = ["A1","A2","A3","C5","C6"];
+                                    // RETRIEVE TAKEN SEATS FROM DATABASE
+                                    $movsess_detail_query = "select * FROM movsessions WHERE id=".$movie_session_id.";";
+                                    $detail_result = $db->query($movsess_detail_query);
+                                    $row = $detail_result->fetch_assoc();
+                                    $occupied_seats = explode(",",$row['taken_seats']);
                                     //passing all input data from the previous page (date selection) to the next page (booking cart) via POST method
                                     echo '
                                         <input type="text" name="movie_id" class="hidden-input" value="'.$movie_id.'">
+                                        <input type="text" name="movie_session_id" class="hidden-input" value="'.$movie_session_id.'">
                                         <input type="text" name="date" class="hidden-input" value="'.$date.'">
                                         <input type="text" name="time" class="hidden-input" value="'.$timing.'">
                                         <input type="text" name="cinema_id" class="hidden-input" value="'.$cinema_id.'">
-                                        <input type="text" name="qty" class="hidden-input" value="'.$qty.'">
+                                        <input type="text" id="qty" name="qty" class="hidden-input" value="'.$qty.'">
                                     ';
                                     if ($_GET['edit']!=NULL) {
                                         echo '<input type="text" name="edit" class="hidden-input" value="'.$_GET['edit'].'">';
@@ -116,19 +128,27 @@
                                             <p class="grey-5">Seat '.$num.'</p>
                                         ';
                                         echo '
-                                            <select name="seat'.$num.'" id="seat'.$num.'">
+                                            <select name="seat'.$num.'" id="seat'.$num.'" required>
+                                            <option disabled selected value="none">Select</option> 
                                         ';
-                                        foreach ($seats as $item) {
-                                            echo '
-                                                <option value="'.$item.'">'.$item.'</option>
-                                            ';
+                                        foreach ($SEATS as $item) {
+                                            if (in_array($item,$occupied_seats)) {
+                                                echo '
+                                                    <option value="'.$item.'" disabled>'.$item.'</option>
+                                                ';
+                                            }
+                                            else {
+                                                echo '
+                                                    <option value="'.$item.'">'.$item.'</option>
+                                                ';
+                                            }
                                         }
                                         echo '</select></div>'; 
                                     }
                                 ?>
                             </div>
                             <br><br>
-                            <input type="submit" value="PROCEED">
+                            <input type="submit" value="PROCEED" style="display: inline;"><p id="submit-warning" class="submit-warning"><em>&nbsp;&nbsp;&nbsp;&nbsp;Please select all seats or choose different seats!</em></p>
                         </form>
                     </div>
                 </div>
@@ -138,5 +158,6 @@
            <p>&#169; Max Vision 2020</p>
        </div>
        <script src="../js/header.js"></script>
+       <script src="./seat_selection.js"></script>
    </body> 
 </html>

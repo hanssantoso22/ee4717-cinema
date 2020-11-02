@@ -1,24 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
--- https://www.phpmyadmin.net/
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
 --
-<<<<<<< Updated upstream
--- Host: localhost:8889
--- Generation Time: Oct 21, 2020 at 10:52 AM
--- Server version: 5.7.26
--- PHP Version: 7.4.2
-=======
 -- Host: localhost
 -- Generation Time: Oct 31, 2020 at 08:45 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
->>>>>>> Stashed changes
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Database: `max-vision`
+-- Database: `f35ee`
 --
 
 -- --------------------------------------------------------
@@ -27,42 +26,88 @@ SET time_zone = "+00:00";
 -- Table structure for table `cinemas`
 --
 
-CREATE TABLE `cinemas` (
-  `id` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cinemas` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
   `cinema_name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(1000) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+--
+-- Dumping data for table `cinemas`
+--
+
+INSERT INTO `cinemas` (`id`, `cinema_name`, `address`, `telephone`, `description`, `picture`) VALUES
+(1, 'Marina', '20 Fifth Marina Avenue\r\nTermasek 978054', '9984 3636', '', '/cinemas/marina-theatre.jpg'),
+(2, 'Downtown', '12 Alme Street\r\nNew Carolina NC 27665-8868\r\nNSA', '189-777-236', '', '/cinemas/downtown-theatre.png'),
+(3, 'Royal', '2-7-6 Nakacho, Nishi-ku\r\nUmeruzawa 273-8888', '03-1194-8471', '', '/cinemas/royal-theatre.jpg');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `movies`
 --
 
-CREATE TABLE `movies` (
-  `id` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `movies` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `movie_name` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL,
+  `genre1` varchar(255),
+  `genre2` varchar(255),
+  `genre3` varchar(255),
+  `genre4` varchar(255),
+  `genre5` varchar(255),
   `description` varchar(1000) NOT NULL,
-  `picture_url` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `picture_url` varchar(1000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
+--
+-- Dumping data for table `movies`
+--
+
+INSERT INTO `movies` (`id`, `movie_name`, `genre`,`genre1`,`genre2`,`genre3`,`genre4`,`genre5`, `description`, `picture_url`) VALUES
+(1, 'Welcome to Sudden Death', 'Action, Thriller, Adventure, Drama', 'Action', 'Thriller', 'Adventure', 'Drama',NULL,'Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team''s owner and Jesse''s daughter during opening night. Facing a ticking clock and impossible odds, it''s up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.', '/assets/movie_posters/welcome_to_sudden_death.jpg'),
+(2, 'Enola Holmes', 'Crime, Drama, Mystery', 'Crime', 'Drama', 'Mystery',NULL,NULL,'While searching for her missing mother, intrepid teen Enola Holmes uses her sleuthing skills to outsmart big brother Sherlock and help a runaway lord.', '/assets/movie_posters/enola_holmes.jpg'),
+(3, 'Mulan', 'Action, Adventure, Drama, Fantasy', 'Action', 'Adventure', 'Drama', 'Fantasy',NULL,'When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential.', '/assets/movie_posters/mulan.jpg'),
+(4, '2067', 'Science Fiction, Thriller, Drama', 'Science Fiction', 'Thriller', 'Drama',NULL,NULL,'A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.', '/assets/movie_posters/2067.jpg'),
+(5, 'Hard Kill', 'Action, Thriller', 'Action', 'Thriller',NULL,NULL,NULL,'The work of billionaire tech CEO Donovan Chalmers is so valuable that he hires mercenaries to protect it, and a terrorist group kidnaps his daughter just to get it.', '/assets/movie_posters/hard_kill.jpg'),
+(6, 'Money Plane', 'Action', 'Action',NULL,NULL,NULL,NULL,'A professional thief with $40 million in debt and his family''s life on the line must commit one final heist - rob a futuristic airborne casino filled with the world''s most dangerous criminals.', '/assets/movie_posters/money_plane.jpg'),
+(7, 'Happy Halloween Scooby-Doo!', 'Animation, Family, Mystery, Comedy, Crime', 'Animation', 'Family', 'Mystery', 'Comedy', 'Crime','Scooby-Doo and the gang team up with their pals, Bill Nye The Science Guy and Elvira Mistress of the Dark, to solve this mystery of gigantic proportions and save Crystal Cove!', '/assets/movie_posters/happy_halloween_scooby-doo!.jpg'),
+(8, 'Rogue', 'Action','Action', NULL,NULL,NULL,NULL,'Battle-hardened O’Hara leads a lively mercenary team of soldiers on a daring mission: rescue hostages from their captors in remote Africa. But as the mission goes awry and the team is stranded, O’Hara’s squad must face a bloody, brutal encounter with a gang of rebels.', '/assets/movie_posters/rogue.jpg'),
+(9, 'My Hero Academia: Heroes Rising', 'Animation, Action', 'Animation', 'Action',NULL,NULL,NULL,'Class 1-A visits Nabu Island where they finally get to do some real hero work. The place is so peaceful that it''s more like a vacation … until they''re attacked by a villain with an unfathomable Quirk! His power is eerily familiar, and it looks like Shigaraki had a hand in the plan. But with All Might retired and citizens'' lives on the line, there''s no time for questions. Deku and his friends are the next generation of heroes, and they''re the island''s only hope.', '/assets/movie_posters/my_hero_academia_hero_rising.jpg'),
+(10, 'Beckman', 'Action', 'Action',NULL,NULL,NULL,NULL,'A contract killer, becomes the reverend of a LA church, until a cult leader and his minions kidnap his daughter. Blinded by vengeance, he cuts a bloody path across the city. The only thing that can stop him is his newfound faith.', '/assets/movie_posters/beckman.jpg'),
+(11, 'American Pie Presents: Girls Rules', 'Comedy', 'Comedy',NULL,NULL,NULL,NULL,'It''s Senior year at East Great Falls. Annie, Kayla, Michelle, and Stephanie decide to harness their girl power and band together to get what they want their last year of high school.', '/assets/movie_posters/america_pie_presents_girls_rules.jpg'),
+(12, 'Santana', 'Action','Action', NULL,NULL,NULL,NULL,'Two brothers — one a narcotics agent and the other a general — finally discover the identity of the drug lord who murdered their parents decades ago. They may kill each other before capturing the bad guys.', '/assets/movie_posters/santana.jpg'),
+(13, 'Peninsula', 'Action, Horror, Thriller','Action', 'Horror', 'Thriller', NULL,NULL,'A soldier and his team battle hordes of post-apocalyptic zombies in the wastelands of the Korean Peninsula.', '/assets/movie_posters/peninsula.jpg'),
+(14, 'Ava', 'Action, Crime, Drama, Thriller','Action', 'Crime', 'Drama', 'Thriller', NULL,'A black ops assassin is forced to fight for her own survival after a job goes dangerously wrong.', '/assets/movie_posters/ava.jpg'),
+(15, 'Unknown Origins', 'Drama, Thriller','Drama', 'Thriller', NULL,NULL,NULL,'In Madrid, Spain, a mysterious serial killer ruthlessly murders his victims by recreating the first appearance of several comic book superheroes. Cosme, a veteran police inspector who is about to retire, works on the case along with the tormented inspector David Valentín and his own son Jorge Elías, a nerdy young man who owns a comic book store.', '/assets/movie_posters/unknown_origins.jpg'),
+(16, 'Artemis Fowl', 'Adventure, Fantasy, Science Fiction, Family, Action','Adventure', 'Fantasy', 'Science Fiction', 'Family', 'Action', 'Artemis Fowl is a 12-year-old genius and descendant of a long line of criminal masterminds. He soon finds himself in an epic battle against a race of powerful underground fairies who may be behind his father''s disappearance.', '/assets/movie_posters/artemis_fowl.jpg'),
+(17, 'Archive', 'Science Fiction, Drama, Thriller', 'Science Fiction', 'Drama', 'Thriller',NULL,NULL,'2038: George Almore is working on a true human-equivalent AI, and his latest prototype is almost ready. This sensitive phase is also the riskiest as he has a goal that must be hidden at all costs—being reunited with his dead wife.', '/assets/movie_posters/archive.jpg'),
+(18, 'Project Power', 'Action, Crime, Science Fiction','Action', 'Crime', 'Science Fiction',NULL,NULL, 'An ex-soldier, a teen and a cop collide in New Orleans as they hunt for the source behind a dangerous new pill that grants users temporary superpowers.', '/assets/movie_posters/project_power.jpg'),
+(19, 'One Night in Bangkok', 'Action, Thriller','Action', 'Thriller', NULL,NULL,NULL,'A hit man named Kai flies into Bangkok, gets a gun, and orders a cab. He offers a professional female driver big money to be his all-night driver. But when she realizes Kai is committing brutal murders at each stop, it''s too late to walk away. Meanwhile, an offbeat police detective races to decode the string of slayings before more blood is spilled.', '/assets/movie_posters/one_night_in_bangkok.jpg'),
+(20, 'We Bare Bears: The Movie', 'Family, Animation, Adventure, Comedy, Mystery','Family', 'Animation', 'Adventure', 'Comedy', 'Mystery', 'When Grizz, Panda, and Ice Bear''s love of food trucks and viral videos went out of hand, it catches the attention of Agent Trout from the National Wildlife Control, who pledges to restore the “natural order” by separating them forever. Chased away from their home, the Bears embark on an epic road trip as they seek refuge in Canada, with their journey being filled with new friends, perilous obstacles, and huge parties. The risky journey also forces the Bears to face how they first met and became brothers, in order to keep their family bond from splitting apart.', '/assets/movie_posters/we_bare_bears_the_movie.jpg'),
+(21, 'Secret Society of Second Born Royals', 'Action, Adventure, Comedy, Fantasy', 'Action', 'Adventure', 'Comedy', 'Fantasy',NULL,'Sam is a teenage royal rebel, second in line to the throne of the kingdom of Illyria. Just as her disinterest in the royal way of life is at an all-time high, she discovers she has super-human abilities and is invited to join a secret society of similar extraordinary second-born royals charged with keeping the world safe.', '/assets/movie_posters/secret_society_of_second_born_royals.jpg'),
+(22, 'KonoSuba: God''s Blessing on this Wonderful World! Legend of Crimson', 'Adventure, Comedy, Animation, Fantasy','Adventure', 'Comedy', 'Animation', 'Fantasy', NULL,'It is not strange that the Demon Lord''s forces fear the Crimson Demons, the clan from which Megumin and Yunyun originate. Even if the Demon Lord''s generals attack their village, the Crimson Demons can just easily brush them off with their supreme mastery of advanced and overpowered magic. When Yunyun receives a seemingly serious letter regarding a potential disaster coming to her hometown, she immediately informs Kazuma Satou and the rest of his party. After a series of wacky misunderstandings, it turns out to be a mere prank by her fellow demon who wants to be an author. Even so, Megumin becomes worried about her family and sets out toward the Crimson Demons'' village with the gang. There, Kazuma and the others decide to sightsee the wonders of Megumin''s birthplace. However, they soon come to realize that the nonsense threat they received might have been more than just a joke.', '/assets/movie_posters/konosuba_god''s_blessing_on_this_wonderful_world!_legend_of_crimson.jpg'),
+(23, 'Cats & Dogs 3: Paws Unite', 'Comedy, Action', 'Comedy', 'Action',NULL,NULL,NULL,'It''s been ten years since the creation of the Great Truce, an elaborate joint-species surveillance system designed and monitored by cats and dogs to keep the peace when conflicts arise. But when a tech-savvy villain hacks into wireless networks to use frequencies only heard by cats and dogs, he manipulates them into conflict and the worldwide battle between cats and dogs is BACK ON. Now, a team of inexperienced and untested agents will have to use their old-school animal instincts to restore order and peace between cats and dogs everywhere.', '/assets/movie_posters/cats_&_dogs_3_paws_unite.jpg'),
+(24, 'Joker', 'Crime, Thriller, Drama','Crime', 'Thriller', 'Drama', NULL,NULL,'During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.', '/assets/movie_posters/joker.jpg'),
+(25, 'Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)', 'Action, Crime, Comedy','Action', 'Crime', 'Comedy', NULL,NULL,'Harley Quinn joins forces with a singer, an assassin and a police detective to help a young girl who had a hit placed on her after she stole a rare diamond from a crime lord.', '/assets/movie_posters/birds_of_prey_(and_the_fantabulous_emancipation_of_one_harley_quinn).jpg');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `movsessions`
 --
 
-CREATE TABLE `movsessions` (
-  `id` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `movsessions` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
   `movie_id` int(8) NOT NULL,
   `cinema_id` int(8) NOT NULL,
+  `hall` int(2) NOT NULL,
   `weekend` tinyint(1) NOT NULL,
-<<<<<<< Updated upstream
-  `timing` time(6) NOT NULL,
-  `price` float(4,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-=======
   `timing` datetime NOT NULL,
   `price` float(4,2) NOT NULL,
   `taken_seats` varchar(1000) NOT NULL,
@@ -2046,22 +2091,17 @@ INSERT INTO `movsessions` (`id`, `movie_id`, `cinema_id`, `hall`, `weekend`, `ti
 (2026, 9, 3, 3, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2027, 12, 3, 4, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2028, 8, 3, 5, 1, '2020-10-31 21:30:00', 9.00, '');
->>>>>>> Stashed changes
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
-  `id` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
   `user_id` int(8) NOT NULL,
   `movsession_id` int(8) NOT NULL,
-<<<<<<< Updated upstream
-  `timestamp` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  `quantity` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-=======
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `quantity` int(8) NOT NULL,
   `selected_seats` varchar(1000) NOT NULL,
@@ -2076,94 +2116,18 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `movsession_id`, `timestamp`, `quantity`, `selected_seats`) VALUES
 (2, 1, 2022, '2020-10-29 16:14:08', 1, 'B9');
->>>>>>> Stashed changes
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-<<<<<<< Updated upstream
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cinemas`
---
-ALTER TABLE `cinemas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `movies`
---
-ALTER TABLE `movies`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `movsessions`
---
-ALTER TABLE `movsessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `movie_id` (`movie_id`),
-  ADD KEY `cinema_id` (`cinema_id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `movsession_id` (`movsession_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cinemas`
---
-ALTER TABLE `cinemas`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `movies`
---
-ALTER TABLE `movies`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `movsessions`
---
-ALTER TABLE `movsessions`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-=======
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
@@ -2177,7 +2141,6 @@ ALTER TABLE `users`
 INSERT INTO `users` (`id`, `fname`, `username`, `email`, `password`) VALUES
 (1, '', 'admin', '', '$2y$10$uakJhjZCizJqDAuJEF89S.jkYpnsgLyF691thxXtEbTUb6y4njSBe'),
 (2, 'Daryl Tay', 'dtay009', 'dtay009@e.ntu.edu.sg', '$2y$10$Ef8ye7T9lAG1ckuN7Vi2V.fopTda7oZFWtxtL0Qj/SjGmgDY1syTS');
->>>>>>> Stashed changes
 
 --
 -- Constraints for dumped tables
@@ -2196,3 +2159,7 @@ ALTER TABLE `movsessions`
 ALTER TABLE `orders`
   ADD CONSTRAINT `movsession_fk` FOREIGN KEY (`movsession_id`) REFERENCES `movsessions` (`id`),
   ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

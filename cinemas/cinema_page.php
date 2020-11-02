@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Cinema Info
+           Max Vision - Cinema Info
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="cinemas_location.css">
@@ -63,63 +63,13 @@
 				</div>
 				<div class="row">
 				</div>
-<<<<<<< Updated upstream
-            </div>
-			<div class="row">
-			<p class="grey-5" >Buy ticket(s) </p>
-                        <form action="../movies/movie_seat_selection.php" method="GET">
-                        <?php
-                            echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
-                        ?>
-                        <p class="grey-5">Choose schedule: </p>
-				<table>
-=======
 				<div class="row">
 					<div class="col-12" style="padding-left: 40px;">
 					<p class="grey-5" >Buy ticket(s) </p>
 					<form action="../movies/movie_seat_selection.php" method="GET">
->>>>>>> Stashed changes
 					<?php
 						echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
 					?>
-<<<<<<< Updated upstream
-					<tr>
-						<th><p>Movies</p></th>
-						<?php
-						for ($x=0;$x<7;$x++){
-							echo'<th>'.date('d M',strtotime($day[$x])).'</th>';										
-						}
-						?>
-					</tr>
-					<?php
-					$query = "SELECT id, movie_id, CAST(timing AS DATE) date, timing AS time_movie FROM movsessions WHERE `cinema_id`=$cinema_id ORDER BY `movie_id` ASC, `timing` ASC";
-					$movie_sess = $db->query($query);					
-					$query2= "SELECT id, movie_name FROM movies ORDER BY 'id' ASC";
-					$movie_name = $db->query($query2);
-					$movie_row=0;
-					$row = $movie_sess->fetch_assoc();
-					while ($row2 = $movie_name->fetch_assoc()){
-						$movie_row=$row2['id'];
-						while (!in_array($row['date'],$day )){
-							$row = $movie_sess->fetch_assoc();	
-						}
-						if ($movie_row==$row['movie_id'] && in_array($row['date'],$day)){
-							echo '<tr>
-								  <td>'.$row2['movie_name'].'</td>';
-							for ($x=0;$x<7;$x++){
-								echo'<td>';										
-								while ($day[$x]==$row['date']){	
-									echo '<input type="radio" name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
-									global $row;
-									$row = $movie_sess->fetch_assoc();							
-								}									
-								echo'</td>';
-							}
-							echo '</tr>';
-							while (!in_array($row['date'],$day)){
-								if (!$row = $movie_sess->fetch_assoc())
-									break;
-=======
 					<p class="grey-5">Choose schedule: </p>
 						<table>
 							<?php
@@ -163,7 +113,6 @@
 											break;
 									}
 								}
->>>>>>> Stashed changes
 							}
 							?>
 						</table>

@@ -3,13 +3,8 @@
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-<<<<<<< Updated upstream
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
-=======
 $username = $password = $confirm_password = $fname = $email = "";
 $username_err = $password_err = $confirm_password_err = $fname_err = $email_err = "";
->>>>>>> Stashed changes
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -46,9 +41,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->close();
         }
     }
-<<<<<<< Updated upstream
-    
-=======
 
     // Validate email
     if(empty(trim($_POST["e_mail"]))){
@@ -90,7 +82,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $fname = trim($_POST["fname"]);
     }
      
->>>>>>> Stashed changes
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";     
@@ -114,28 +105,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-<<<<<<< Updated upstream
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-         
-        if($stmt = $db->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_username, $param_password);
-=======
         $sql = "INSERT INTO users (username, password, email, fname) VALUES (?, ?, ?, ?)";
          
         if($stmt = $db->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("ssss", $param_username, $param_password, $param_email, $param_fname);
->>>>>>> Stashed changes
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-<<<<<<< Updated upstream
-=======
 			$param_email = $email;
 			$param_fname = $fname;
->>>>>>> Stashed changes
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -161,10 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            Max Vision - Home
        </title>
        <link rel="stylesheet" href="../css/main.css">
-<<<<<<< Updated upstream
-=======
        <link rel="stylesheet" href="login.css">
->>>>>>> Stashed changes
    </head>
    <body>
        <div id="main-header">
@@ -183,26 +160,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<h2>Sign Up</h2>
 					<p>Please fill this form to create an account.</p>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-<<<<<<< Updated upstream
-						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-							<label>Username</label>
-							<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-							<span class="help-block"><?php echo $username_err; ?></span>
-						</div>    
-						<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-							<label>Password</label>
-							<input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-							<span class="help-block"><?php echo $password_err; ?></span>
-						</div>
-						<div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-							<label>Confirm Password</label>
-							<input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-							<span class="help-block"><?php echo $confirm_password_err; ?></span>
-						</div>
-						<div class="form-group">
-							<input type="submit" class="btn btn-primary" value="Submit">
-							<input type="reset" class="btn btn-default" value="Reset">
-=======
                         <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                             <div class="row">
                                 <div class="col-1"><label>Email</label></div>
@@ -251,7 +208,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
 							<input type="submit" class="btn primary-btn" value="Submit" style="margin-right: 15px;">
 							<input type="reset" class="btn secondary-btn" value="Reset">
->>>>>>> Stashed changes
 						</div>
 						<p>Already have an account? <a href="login.php">Login here</a>.</p>
 					</form>
