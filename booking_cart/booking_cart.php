@@ -14,26 +14,44 @@
                <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
+               <div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
                <div class="col-2"><a class="cart" href="booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
             <div id="content-box">
-                <?php
-                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID'])) {
-                        echo '
-                            <div>
-                                <p class="page-title">Tickets</p>
-                            </div>
-                        ';
-                        include '../config.php';
-                        include '../constants.php';
-                        session_start();
-                        $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
-                        $_SESSION['total'] = 0.00;
-                        function addTotalPrice (&$total_price,$subtotal) {
-                            $total_price+=$subtotal;
+            <?php
+			session_start();
+			if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+			{
+				echo '
+				<div>
+                    <p class="page-title">Tickets</p>
+                </div>';
+                
+                    include '../config.php';
+                    include '../constants.php';
+                    
+                    $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
+                    $total = 0.00;
+                    function addTotalPrice (&$total_price,$subtotal) {
+                        $total_price+=$subtotal;
+                    }
+                    function subtractTotalPrice (&$total_price,$subtotal) {
+                        $total_price-=$subtotal;
+                    }
+                    if (!isset($_SESSION['cart'])) {
+                        $_SESSION['cart'] = array();
+                    }
+                    
+                    /* Here's to make sure $_SESSION['cart'] is only updated when the cart page is accessed from seat selection page (click add to cart button).
+                        As such, the $_SESSION['cart'] variable won't be updated if users access cart page from other pages */
+                    if (isset($_POST['movie_id'])) {
+                        $seats = array();
+                        for ($i=0;$i<$_POST['qty'];$i++) { //put all seat inputs into an array
+                            $num = $i+1;
+                            $name = 'seat'.$num;
+                            push_element($seats,$_POST[$name]);
                         }
                         function subtractTotalPrice (&$total_price,$subtotal) {
                             $total_price-=$subtotal;
@@ -197,9 +215,16 @@
                     }
                     else {
                         header("location:../login/login.php");
-                    }
-                ?>
-            <!-- closing tag for content-box -->
+                    }                   
+            // closing tag for content-box
+				echo '
+                <a href="empty_cart.php">Empty Cart</a>
+				';
+			}	
+			else
+			{
+				header("location:../login/login.php");
+			} ?>
             </div>               
        </div>
        <div id="main-footer">

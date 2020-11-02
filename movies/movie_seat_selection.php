@@ -14,14 +14,22 @@
                <div class="col-2"><a class="tab active" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
+               <?php
+				session_start();
+				if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+				{	echo'<div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
+						 ';
+				}
+				else
+				{	echo'<div class="col-2"><a class="tab" href="../login/login.php">LOGIN</a></div>
+						 ';
+				}?>
                <div class="col-2"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
            <div id="content-box">
                 <?php
-                    session_start();
                     include '../config.php';
                     $movie_session_id = $_GET['movie_session_id'];
                     $movie_details_query = 'SELECT * FROM movsessions WHERE id='.$movie_session_id.';';

@@ -14,7 +14,16 @@
                <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab active" href="cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
+               <?php
+				session_start();
+				if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+				{	echo'<div class="col-2"><a class="tab" href="../login/logout.php">LOGOUT</a></div>
+						 ';
+				}
+				else
+				{	echo'<div class="col-2"><a class="tab" href="../login/login.php">LOGIN</a></div>
+						 ';
+				}?>
                <div class="col-2"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
@@ -28,11 +37,7 @@
 						<div id="cin-pic">
 						<img src="downtown-theatre.png" alt="Downtown Theatre" style="width:auto;" width="200" height="200" usemap="#dwt">
 						<map name="dwt">
-<<<<<<< Updated upstream
-							<area shape="rect" coords="0,0,200,200" href="cinema_downtown.php" alt="Link">
-=======
 							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=2" alt="Link">
->>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
@@ -49,11 +54,7 @@
 						<div id="cin-pic">
 						<img src="marina-theatre.jpg" alt="Marina Theatre" style="width:auto;" width="200" height="200" usemap="#mar">
 						<map name="mar">
-<<<<<<< Updated upstream
-							<area shape="rect" coords="0,0,200,200" href="cinema_marina.php" alt="Link">
-=======
 							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=1" alt="Link">
->>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
@@ -71,11 +72,7 @@
 						<div id="cin-pic">
 						<img src="royal-theatre.jpg" alt="Royal Theatre" style="width:auto;" width="200" height="200" usemap="#roy">
 						<map name="roy">
-<<<<<<< Updated upstream
-							<area shape="rect" coords="0,0,200,200" href="cinema_royal.php" alt="Link">
-=======
 							<area shape="rect" coords="0,0,200,200" href="cinema_page.php?cinema_id=3" alt="Link">
->>>>>>> Stashed changes
 						</map>
 						</div>
 						<div style="height:50px;">
