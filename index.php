@@ -2,30 +2,35 @@
 <html>
    <head>
        <title>
-           Cine 23 - Home
+           Max Vision - Home
        </title>
        <link rel="stylesheet" href="./css/main.css">
        <link rel="stylesheet" href="./css/movies.css">
    </head>
    <body>
        <div id="main-header">
-           <div class="row">
-               <div class="col-2"><a href="index.php" ><img class="cinema-name" src="assets/common/logo2.png"></a></div>
-               <div class="col-2"><a class="tab active" href="index.php">MOVIES</a></div>
-               <div class="col-2"><a class="tab" href="./cinemas/cinemas.php">CINEMAS</a></div>
-               <div class="col-2"><a class="tab" href="./bookings/bookings.php">BOOKINGS</a></div>
-               <?php
-				session_start();
-				if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
-				{	echo'<div class="col-2"><a class="tab" href="./login/logout.php">LOGOUT</a></div>
-						 ';
-				}
-				else
-				{	echo'<div class="col-2"><a class="tab" href="./login/login.php">LOGIN</a></div>
-						 ';
-				}?>
-               <div class="col-2"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
-           </div>
+            <div class="row">
+                <div class="col-2"><a href="index.php" ><img class="cinema-name" src="assets/common/logo2.png"></a></div>
+                <div class="col-2"><a class="tab active" href="index.php">MOVIES</a></div>
+                <div class="col-2"><a class="tab" href="./cinemas/cinemas.php">CINEMAS</a></div>
+                <div class="col-2"><a class="tab" href="./bookings/bookings.php">BOOKINGS</a></div>
+                <?php
+                    session_start();
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+                    {	
+                        echo'<div class="col-3 login-container"><a href="./login/logout.php"><span class="username">Daryl Tay</span><span class="logout">exit_to_app</span></a></div>
+                            '
+                        ;
+                    }
+                    else
+                    {	
+                        echo'<div class="col-3 login-container"><a class="login" href="./login/login.php">account_circle</a></div>
+                            '
+                        ;
+                    }
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
+            </div>
        </div>
        <div id="main-body">
            <div id="content-box">
@@ -39,9 +44,16 @@
                                     include 'config.php';
                                     include 'constants.php';
                                     foreach ($GENRE as $item) {
-                                        echo '
-                                            <input type="checkbox" name="genre[]" value="'.$item.'"> <span class="grey-6">'.$item.'</span><br><br>
-                                        ';
+                                        if (in_array($item,explode(",",$_GET['genres']))) {
+                                            echo '
+                                                <input type="checkbox" name="genre[]" value="'.$item.'" checked> <span class="grey-6">'.$item.'</span><br><br>
+                                            ';
+                                        }
+                                        else {
+                                            echo '
+                                                <input type="checkbox" name="genre[]" value="'.$item.'"> <span class="grey-6">'.$item.'</span><br><br>
+                                            ';
+                                        }
                                     }
                                 ?>
                                 <input type="submit" value="Apply">
@@ -55,7 +67,27 @@
                         
                         <div class="row">
                             <?php
-                                $query = "select * from movies";
+                                $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
+                                if (isset($_GET['genres'])) {
+                                    $genres = explode(",",$_GET['genres']);
+                                    $query = 'select * from movies where ';
+                                    function concatenateText (&$text,$new_string) {
+                                        $text = $text.$new_string;
+                                    }
+                                    for ($i=0;$i<count($genres);$i++) {
+                                        if ($i==0) {
+                                            $additional_filter = "genre1='".$genres[$i]."' or genre2='".$genres[$i]."' or genre3='".$genres[$i]."' or genre4='".$genres[$i]."' or genre5='".$genres[$i]."' ";
+                                        }
+                                        else {
+                                            $additional_filter = "or genre1='".$genres[$i]."' or genre2='".$genres[$i]."' or genre3='".$genres[$i]."' or genre4='".$genres[$i]."' or genre5='".$genres[$i]."' ";
+                                        }
+                                        concatenateText($query,$additional_filter);
+                                    }
+                                }
+                                else {
+                                    $query = "select * from movies";
+                                }
+                                
                                 $movies = $db->query($query);
                                 $no_records = $movies->num_rows;
                                 for ($i=0; $i<$no_records; $i++) {
@@ -64,6 +96,7 @@
                                         <div class="col-3">
                                             <div class="movie-card">
                                                 <div class="movie-poster">
+                                                    <img class="poster" src=".'.$row['picture_url'].'">
                                                 </div>
                                                 <div class="short-details">
                                                     <p class="font-16 bold center"><a href="./movies/movie_details.php?movie_id='.$row['id'].'">'.$row['movie_name'].'</a></p>

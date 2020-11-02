@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Booking Cart
+           Max Vision - Booking Cart
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="bookings.css">

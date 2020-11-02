@@ -94,6 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            Max Vision - Home
        </title>
        <link rel="stylesheet" href="../css/main.css">
+       <link rel="stylesheet" href="login.css">
    </head>
    <body>
        <div id="main-header">
@@ -106,21 +107,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                <div class="col-2"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
-       <div id="main-body">
+       <div id="main-body"">
            <div id="content-box">
 				<div class="wrapper">
 					<h2>Login</h2>
 					<p>Please fill in your credentials to login.</p>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-							<label>Username</label>
-							<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-							<span class="help-block"><?php echo $username_err; ?></span>
+                        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                            <div class="row">
+                                <div class="col-1">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+							        <span class="help-block"><?php echo $username_err; ?></span>
+                                </div>
+                            </div>
 						</div>    
-						<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-							<label>Password</label>
-							<input type="password" name="password" class="form-control">
-							<span class="help-block"><?php echo $password_err; ?></span>
+                        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                            <div class="row">
+                                <div class="col-1">
+                                    <label>Password</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="password" name="password" class="form-control">
+							        <span class="help-block"><?php echo $password_err; ?></span>
+                                </div>
+                            </div>
 						</div>
 						<div class="form-group">
 							<input type="submit" class="btn btn-primary" value="Login">

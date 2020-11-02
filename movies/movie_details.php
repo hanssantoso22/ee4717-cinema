@@ -63,7 +63,7 @@
                         <br>
                         <p class="grey-5" >Buy ticket(s) </p>
                         <form action="movie_seat_selection.php" method="GET">
-                        <?php //to pass movie_id to the next page via GET method
+                        <?php
                             echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" required value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
                         ?>
                         <p class="grey-5">Choose schedule: </p>

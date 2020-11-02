@@ -2,7 +2,7 @@
 <html>
    <head>
        <title>
-           Cine 23 - Cinema Info
+           Max Vision - Cinema Info
        </title>
        <link rel="stylesheet" href="../css/main.css">
        <link rel="stylesheet" href="cinemas_location.css">
