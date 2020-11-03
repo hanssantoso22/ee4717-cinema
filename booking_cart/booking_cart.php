@@ -72,8 +72,7 @@
                             ';
                             
                             
-                            for ($i=0; $i<count($_SESSION['cart']); $i++) { //iterating thorugh each order item
-                                $array = $_SESSION['cart'][$i];
+                            foreach ($_SESSION['cart'] as $i=>$array) { //iterating thorugh each order item
                                 $movie_session_id = $array['movie_session_id'];
                                 $movie_name = $MOVIES[$array['movie_id']];
                                 $cinema_name = $CINEMAS[$array['cinema_id']];
