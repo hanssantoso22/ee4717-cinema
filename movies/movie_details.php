@@ -14,15 +14,28 @@
                <div class="col-2"><a class="tab active" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
-               <div class="col-2"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
+               <?php
+                    session_start();
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+                    {	
+                        echo'<div class="col-3 login-container"><a href="../login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>
+                            '
+                        ;
+                    }
+                    else
+                    {	
+                        echo'<div class="col-3 login-container"><a class="login" href="../login/login.php">account_circle</a></div>
+                            '
+                        ;
+                    }
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
            <div id="content-box">
                 <a href="../index.php">< Back to home</a><br><br>
                 <?php
-                    session_start();
                     include '../config.php';
                     $movie_id = $_GET['movie_id'];
                     $date = $_GET['date'];
@@ -86,14 +99,21 @@
                             }
                             while ($row2 = $movie_name->fetch_assoc()){
                                 $movie_row=$row2['id'];
+								while (!in_array($row['date'],$day )){
+									$row = $movie_sess->fetch_assoc();	
+								}
                                 if ($movie_row==$row['cinema_id']){
                                     echo '<tr>
                                         <td>'.$row2['cinema_name'].'</td>';
                                     for ($x=0;$x<7;$x++){
                                         echo'<td>';										
                                         while ($day[$x]==$row['date']){	
-                                            echo '<input type="radio" required name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
-                                            global $row;
+											if($day[0]==$row['date']&&date('G:i')>date('G:i',strtotime($row['time_movie']))){
+											}
+											else{
+												echo '<input type="radio" name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
+											}
+											global $row;
                                             $row = $movie_sess->fetch_assoc();							
                                         }									
                                         echo'</td>';

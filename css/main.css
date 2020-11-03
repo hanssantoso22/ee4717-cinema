@@ -26,6 +26,9 @@
     position: fixed;
     z-index: 1;
 }
+.login-header {
+    height: 30px;
+}
 .navbar {
     height: 30px;
 }
@@ -44,6 +47,31 @@ body {
 #main-header .active {
     background-color: #FFCD1D;
     color: #05396D !important;
+}
+.login {
+    font-family: 'MaterialIcons-Regular';
+    color: #FFCD1D;
+    vertical-align: middle;
+    padding-right: 30px;
+    line-height: 100px;
+    font-weight: 400;
+    font-size: 30px;
+}
+.logout {
+    font-family: 'MaterialIcons-Regular';
+    color: #FFCD1D;
+    vertical-align: middle;
+    padding-right: 30px;
+    line-height: 100px;
+    font-weight: 400;
+    font-size: 24px;
+}
+.username {
+    margin-right: 10px;
+    letter-spacing: 1px;
+}
+.login-container {
+    text-align: right;
 }
 .tab {
     color: #FFCD1D;
@@ -90,6 +118,9 @@ body {
     color: #05396D;
     padding: 10px;
     border-radius: 5px;
+}
+.cart-container {
+    text-align: center;
 }
 .cart {
     font-family: 'MaterialIcons-Regular';
@@ -332,6 +363,15 @@ h1, h2, h3, h4, h5, h6 {
     border-width: 0px;
     font-family: 'lato.bold';
     letter-spacing: 1px;
+}
+input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: radio;
+    box-sizing: border-box;
+    margin: 3px 3px 10px 5px;
+    padding: initial;
+    border: initial;
 }
 .filters input[type="submit" i] {
     background-color: transparent !important;
