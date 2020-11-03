@@ -104,7 +104,7 @@
 											if($day[0]==$row['date']&&date('G:i')>date('G:i',strtotime($row['time_movie']))){
 											}
 											else{
-												echo '<input type="radio" name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
+												echo '<input type="radio" required name="movie_session_id" value="'.$row['id'].'">'.date('G:i',strtotime($row['time_movie'])).'</input><br>';
 											}
 											global $row;
 											$row = $movie_sess->fetch_assoc();							
