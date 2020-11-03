@@ -14,17 +14,37 @@
                 <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                 <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                 <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-                <div class="col-2"></div>
-                <div class="col-2"><a class="cart" href="booking_cart.php">shopping_cart</a></div>
+                <?php
+                    session_start();
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID']))
+                    {	
+                        echo'<div class="col-3 login-container"><a href="../login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>
+                            '
+                        ;
+                    }
+                    else
+                    {	
+                        echo'<div class="col-3 login-container"><a class="login" href="../login/login.php">account_circle</a></div>
+                            '
+                        ;
+                    }
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
             </div>
         </div>
         <div id="main-body">
             <?php
+				
+				$message='Thank you for your purchase!';
                 include '../config.php';
+				include '../constants.php';
                 session_start();
-                $user_id = 1;
+                $user_id = $_SESSION["SESS_MEMBER_ID"];
                 for ($i=0; $i<count($_SESSION['cart']); $i++) {
                     $array = $_SESSION['cart'][$i];
+					$datetime = date("d-m-Y",strtotime($array['date'])).' '.$array['time'];
+					$movie_name = $MOVIES[$array['movie_id']];
+					$cinema_name = $CINEMAS[$array['cinema_id']];
                     // INSERT DATA INTO ORDERS TABLE
                     $selected_seats_str = implode(",",$array['seats']);
                     $insert_query = "insert into orders (user_id,movsession_id,quantity,selected_seats) VALUES (".$user_id.",".$array['movie_session_id'].",".$array['qty'].",'".$selected_seats_str."');";
@@ -46,15 +66,36 @@
                     // UPDATE TABLE
                     $update_query = "update movsessions SET taken_seats='".$updated_occupied_seats_str."' WHERE id=".$array['movie_session_id'].";";
                     $update = $db->query($update_query);
-
-                    unset($_SESSION['cart']);
-                    unset($_SESSION['total']);
+					
+					$message.='
+					Movie:'.$movie_name.'
+					Time:'.$datetime.'
+					Location:'.$cinema_name.'
+					Seats:'.$selected_seats_str.'
+					';
+                    
                 }
-            ?>
+				unset($_SESSION['cart']);
+                unset($_SESSION['total']);
+				$to = $_POST["email"];
+				$subject = 'Comfirmation for movie order.';
+				$message .= '
+					Check your bookings online at: http://192.168.56.2/f35ee/ee4717-cinema/bookings/bookings.php
+					';
+				// To send HTML mail, the Content-type header must be set
+				$headers = "From: f35ee@localhost" . "\r\n" . 
+						   "Reply-To: f35ee@localhost" . "\r\n" .
+						   "X-Mailer: PHP/" . phpversion();
+				mail($to, $subject, $message, $headers, '-ff35ee@localhost');
+				?>
                 <div id="content-box">
                     <div id="textbox">
                         <h1>THANK YOU FOR YOUR PURCHASE</h1>
-                        <p class="grey-4" style="margin: 50px auto;">A confirmation e-mail will be sent to your email!</p>
+                        <?php
+                            echo '
+                                <p class="grey-4" style="margin: 50px auto;">A confirmation e-mail will be sent to '.$_POST["email"].'!</p>
+                            ';
+                        ?>
                         <button class="primary-btn" style="font-size: 20px;" onclick="window.location.href='../index.php'">Go to Home</button>
                     </div>
                 </div>

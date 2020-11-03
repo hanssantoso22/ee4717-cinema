@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2020 at 10:08 PM
+-- Generation Time: Oct 31, 2020 at 08:45 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -318,7 +318,7 @@ INSERT INTO `movsessions` (`id`, `movie_id`, `cinema_id`, `hall`, `weekend`, `ti
 (255, 21, 1, 3, 0, '2020-10-30 11:00:00', 7.00, ''),
 (256, 21, 2, 1, 0, '2020-10-30 11:00:00', 7.00, ''),
 (257, 9, 2, 2, 0, '2020-10-30 11:00:00', 7.00, ''),
-(258, 1, 2, 3, 0, '2020-10-30 11:00:00', 7.00, ''),
+(258, 1, 2, 3, 0, '2020-10-30 11:00:00', 7.00, 'A9'),
 (259, 18, 2, 4, 0, '2020-10-30 11:00:00', 7.00, ''),
 (260, 12, 3, 1, 0, '2020-10-30 11:00:00', 7.00, ''),
 (261, 3, 3, 2, 0, '2020-10-30 11:00:00', 7.00, ''),
@@ -2084,7 +2084,7 @@ INSERT INTO `movsessions` (`id`, `movie_id`, `cinema_id`, `hall`, `weekend`, `ti
 (2019, 8, 1, 3, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2020, 4, 2, 1, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2021, 7, 2, 2, 1, '2020-10-31 21:30:00', 9.00, ''),
-(2022, 2, 2, 3, 1, '2020-10-31 21:30:00', 9.00, ''),
+(2022, 2, 2, 3, 1, '2020-10-31 21:30:00', 9.00, 'B9'),
 (2023, 19, 2, 4, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2024, 2, 3, 1, 1, '2020-10-31 21:30:00', 9.00, ''),
 (2025, 21, 3, 2, 1, '2020-10-31 21:30:00', 9.00, ''),
@@ -2108,7 +2108,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `movsession_id` (`movsession_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `movsession_id`, `timestamp`, `quantity`, `selected_seats`) VALUES
+(2, 1, 2022, '2020-10-29 16:14:08', 1, 'B9');
 
 -- --------------------------------------------------------
 
@@ -2119,10 +2126,21 @@ CREATE TABLE IF NOT EXISTS `orders` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fname`, `username`, `email`, `password`) VALUES
+(1, '', 'admin', '', '$2y$10$uakJhjZCizJqDAuJEF89S.jkYpnsgLyF691thxXtEbTUb6y4njSBe'),
+(2, 'Daryl Tay', 'dtay009', 'dtay009@e.ntu.edu.sg', '$2y$10$Ef8ye7T9lAG1ckuN7Vi2V.fopTda7oZFWtxtL0Qj/SjGmgDY1syTS');
 
 --
 -- Constraints for dumped tables
