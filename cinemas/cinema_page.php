@@ -29,7 +29,7 @@
                         ;
                     }
                 ?>
-                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
+                <div class="col-1 cart-container"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
@@ -60,9 +60,11 @@
 					</div>
 					<div class="col-8" style="padding-left:40px">
 						<p class="grey-5" >Information: </p>
-						<p class="grey-7 description"><?php echo $row['description'];?></p>
-					</div>
-					<div class="col-12" style="padding-left: 20px;">
+						<div class="row">
+							<div class="col-10">
+								<p class="grey-7 description"><?php echo $row['description'];?></p>
+							</div>
+						</div>
 						<p class="grey-5" >Buy ticket(s) </p>
 						<form action="../movies/movie_seat_selection.php" method="GET">
 						<?php

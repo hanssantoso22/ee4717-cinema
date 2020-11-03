@@ -11,8 +11,16 @@
 table, td, th {
     border: 1px solid #D6D5D5;
     border-collapse: collapse;
+    color: #5C5C5C;
+}
+table {
+    margin-bottom: 30px;
 }
 td, th {
     padding: 15px;
     min-width: 70px;
+}
+.description {
+    letter-spacing: 1px;
+    line-height: 30px;
 }

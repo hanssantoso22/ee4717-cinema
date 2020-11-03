@@ -142,7 +142,7 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             E-MAIL <br><br>
-                                                            <input type="email" id="email" name="email" value='.$_SESSION["email"].' style="width: 95%;" required>
+                                                            <input type="email" id="email" name="email" style="width: 95%;" required>
                                                             <p id="email-warning" class="hidden-message">Invalid e-mail</p>
                                                         </td>
                                                     </tr>
