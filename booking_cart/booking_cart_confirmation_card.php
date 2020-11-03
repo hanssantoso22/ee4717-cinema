@@ -87,7 +87,11 @@
                 <div id="content-box">
                     <div id="textbox">
                         <h1>THANK YOU FOR YOUR PURCHASE</h1>
-                        <p class="grey-4" style="margin: 50px auto;">A confirmation e-mail will be sent to '.$_POST["email"].'!</p>
+                        <?php
+                            echo '
+                                <p class="grey-4" style="margin: 50px auto;">A confirmation e-mail will be sent to '.$_POST["email"].'!</p>
+                            ';
+                        ?>
                         <button class="primary-btn" style="font-size: 20px;" onclick="window.location.href='../index.php'">Go to Home</button>
                     </div>
                 </div>

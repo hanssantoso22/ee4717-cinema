@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<div class="col-3">
-						<h3>Downtown</h3>
+						<a href="cinema_page.php?cinema_id=2"><h3>Downtown</h3></a>
 						<p class="cin-text">12 Alme Street<br>
 											New Carolina NC 27665-8868<br>
 											NSA<br>
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div class="col-3">
-						<h3>Marina</h3>
+						<a href="cinema_page.php?cinema_id=1"><h3>Marina</h3></a>
 						<p class="cin-text">20 Fifth Marina Avenue<br>
 											Termasek 978054<br>
 											Tel:9984 3636</p>
@@ -84,7 +84,7 @@
 						</div>
 					</div>
 					<div class="col-3">
-						<h3>Royal</h3>
+						<a href="cinema_page.php?cinema_id=3"><h3>Royal</h3></a>
 						<p class="cin-text">2-7-6 Nakacho, Nishi-ku<br>
 											Umeruzawa 273-8888<br>
 											Tel:03-1194-8471</p>

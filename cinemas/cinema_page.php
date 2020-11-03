@@ -34,6 +34,7 @@
        </div>
        <div id="main-body">
             <div id="content-box">
+				<a href="cinemas.php">< Back to Cinemas</a><br><br>
 				<?php
                     include '../config.php';
 					include '../constants.php';
@@ -53,24 +54,17 @@
 					<div class="col-3">
 						<div id="cin-pic">
 							<?php
-                            echo '<img src="..'.$row['picture'].'" style="width:auto;" width="400" height="400">';
+                            echo '<img src="..'.$row['picture'].'" style="width:100%; margin-top:20px;" >';
 							?>
 						</div>
 					</div>
-					<div id="cin-txt">
-						<?php echo '<p>'.$row['description'].'</p>' ;?>
-					</div>
-				</div>
-				<div class="row">
-				</div>
-				<div class="row">
-					<div class="col-12" style="padding-left: 40px;">
-					<p class="grey-5" >Buy ticket(s) </p>
-					<form action="../movies/movie_seat_selection.php" method="GET">
-					<?php
-						echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
-					?>
-					<p class="grey-5">Choose schedule: </p>
+					<div class="col-8" style="padding-left: 20px;">
+						<p class="grey-5" >Buy ticket(s) </p>
+						<form action="../movies/movie_seat_selection.php" method="GET">
+						<?php
+							echo '<p class="grey-5" style="display: inline;">Qty: </p><input type="number" min="1" max="10" name="qty" value="'.$qty.'">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Select Seats">'
+						?>
+						<p class="grey-5">Choose schedule: </p>
 						<table>
 							<?php
 							$day=array($today, date('Y-m-d',strtotime("+1 day", strtotime($today))), date('Y-m-d',strtotime("+2 day", strtotime($today))), date('Y-m-d',strtotime("+3 day", strtotime($today))), date('Y-m-d',strtotime("+4 day", strtotime($today))), date('Y-m-d',strtotime("+5 day", strtotime($today))), date('Y-m-d',strtotime("+6 day", strtotime($today))));
@@ -97,7 +91,7 @@
 								}
 								if ($movie_row==$row['movie_id'] && in_array($row['date'],$day)){
 									echo '<tr>
-										  <td>'.$row2['movie_name'].'</td>';
+											<td>'.$row2['movie_name'].'</td>';
 									for ($x=0;$x<7;$x++){
 										echo'<td>';										
 										while ($day[$x]==$row['date']){	

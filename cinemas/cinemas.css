@@ -1,0 +1,6 @@
+.row a:link,
+.row a:visited,
+.row a:active {
+    text-decoration: none;
+    color: #5C5C5C;
+}
