@@ -24,7 +24,7 @@
        <div id="main-body">
             <div id="content-box">
                 <?php
-                    if(true) {
+                    if(isset( $_SESSION['SESS_MEMBER_ID']) && !empty($_SESSION['SESS_MEMBER_ID'])) {
                         echo '
                             <div>
                                 <p class="page-title">Tickets</p>
