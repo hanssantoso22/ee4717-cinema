@@ -14,8 +14,11 @@
                <div class="col-2"><a class="tab" href="../index.php">MOVIES</a></div>
                <div class="col-2"><a class="tab" href="../cinemas/cinemas.php">CINEMAS</a></div>
                <div class="col-2"><a class="tab" href="../bookings/bookings.php">BOOKINGS</a></div>
-               <div class="col-2"></div>
-               <div class="col-2"><a class="cart" href="booking_cart.php">shopping_cart</a></div>
+               <?php
+                    session_start();
+                    echo'<div class="col-3 login-container"><a href="../login/logout.php"><span class="username">'.$_SESSION["fname"].'</span><span class="logout">exit_to_app</span></a></div>';
+                ?>
+                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">
@@ -28,8 +31,7 @@
                             </div>
                         ';
                         include '../config.php';
-                        include '../constants.php';
-                        session_start();
+                        include '../constants.php';                        
                         $_SESSION['history'] = $url.$_SERVER['PHP_SELF'];
                         $_SESSION['total'] = 0.00;
                         function addTotalPrice (&$total_price,$subtotal) {
@@ -140,7 +142,7 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             E-MAIL <br><br>
-                                                            <input type="email" placeholder="E-mail" id="email" name="email" style="width: 95%;" required>
+                                                            <input type="email" id="email" name="email" style="width: 95%;" required>
                                                             <p id="email-warning" class="hidden-message">Invalid e-mail</p>
                                                         </td>
                                                     </tr>
