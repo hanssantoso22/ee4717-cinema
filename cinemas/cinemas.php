@@ -29,7 +29,7 @@
                         ;
                     }
                 ?>
-                <div class="col-1 cart-container"><a class="cart" href="./booking_cart/booking_cart.php">shopping_cart</a></div>
+                <div class="col-1 cart-container"><a class="cart" href="../booking_cart/booking_cart.php">shopping_cart</a></div>
            </div>
        </div>
        <div id="main-body">

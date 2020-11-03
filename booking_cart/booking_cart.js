@@ -71,6 +71,7 @@ function validateForm () {
     }
     else {
         alert ('Edit the invalid fields!')
+        console.log(check)
         return false
     }
 }

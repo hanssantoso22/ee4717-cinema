@@ -364,6 +364,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'lato.bold';
     letter-spacing: 1px;
 }
+input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: radio;
+    box-sizing: border-box;
+    margin: 3px 3px 10px 5px;
+    padding: initial;
+    border: initial;
+}
 .filters input[type="submit" i] {
     background-color: transparent !important;
     color: #0755A3 !important;

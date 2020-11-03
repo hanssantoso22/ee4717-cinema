@@ -4,3 +4,12 @@
     text-decoration: none;
     color: #5C5C5C;
 }
+.description {
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.cin-text {
+    color: #5C5C5C;
+    line-height: 25px;
+    letter-spacing: 1px;
+}
